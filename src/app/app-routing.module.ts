@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
+import { CadastroPetsComponent } from './components/cadastro-pets/cadastro-pets.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
+  {path: 'cadastro-pet', component: CadastroPetsComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 

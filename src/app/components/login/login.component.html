@@ -26,11 +26,12 @@
       </div>
 
       <div class="login">
-        <form>
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
           <label for="chk" aria-hidden="true">Login</label>
-          <input type="email" name="email" placeholder="Email" required="">
-          <input type="password" name="pswd" placeholder="Senha" required="">
-          <button>Login</button>
+          <input type="email" formControlName="usuario" placeholder="Usuário" required="">
+          <input type="password" formControlName="senha" placeholder="Senha" required="">
+          <button type="submit">Login</button>
+          <a href="#" class="esqueciSenha" (click)="esqueciSenha()">Esqueci minha senha</a>
         </form>
       </div>
   </div>

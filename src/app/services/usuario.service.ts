@@ -7,7 +7,10 @@ import { Observable } from 'rxjs';
 })
 export class UsuarioService {
 
-  private registerUrl = 'http://localhost:8888/api/v1/users/register';
+  private baseUrl = 'http://localhost:8888/api/v1/users';
+  private registerUrl = `${this.baseUrl}/register`;
+
+  private loginUrl = `${this.baseUrl}/login`; 
 
   constructor(private http: HttpClient) { }
 
@@ -16,5 +19,12 @@ export class UsuarioService {
       'Content-Type': 'application/json'
     });
     return this.http.post(this.registerUrl, userData, { headers });
+  }
+
+  loginUser(userData: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.post(this.loginUrl, userData, { headers });
   }
 }

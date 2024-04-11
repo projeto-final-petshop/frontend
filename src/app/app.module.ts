@@ -6,11 +6,14 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CadastroPetsComponent } from './components/cadastro-pets/cadastro-pets.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    CadastroPetsComponent,
+    
   ],
   imports: [
     BrowserModule,
