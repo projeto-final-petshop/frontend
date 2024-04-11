@@ -36,8 +36,6 @@ export class LoginComponent implements OnInit {
       this.usuarioService.registerUser(this.cadastroForm.value).subscribe({
         next: (response) => {
           console.log('Usuário cadastrado com sucesso!', response)
-          sessionStorage.setItem('userId', response.userId);
-          this.router.navigate(['/cadastro-pet']);
         },
         error: (error) => console.error('Erro ao cadastrar usuário', error)
       });
@@ -52,6 +50,8 @@ export class LoginComponent implements OnInit {
       };
       this.usuarioService.loginUser(userData).subscribe({
         next: (response) => {
+          sessionStorage.setItem('userId', response.userId);
+          this.router.navigate(['/cadastro-pet']);
           console.log('Login realizado com sucesso!', response);
         },
         error: (error) => console.error('Erro ao realizar login', error)
