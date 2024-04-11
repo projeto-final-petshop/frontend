@@ -15,14 +15,14 @@ export class LoginComponent implements OnInit {
 
   constructor(private usuarioService: UsuarioService, private router: Router) { 
     this.cadastroForm = new FormGroup({
-      usuario: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      senha: new FormControl('', [Validators.required]),
-      cpf: new FormControl('', [Validators.required])
+      name: new FormControl('', [Validators.required]),
+      username: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required]),
+      documentNumber: new FormControl('', [Validators.required])
     });
     this.loginForm = new FormGroup({
-      usuario: new FormControl('', [Validators.required]),
-      senha: new FormControl('', [Validators.required])
+      name: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required])
     });
   }
 

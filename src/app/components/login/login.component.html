@@ -11,10 +11,10 @@
       <div class="signup">
         <form [formGroup]="cadastroForm" (ngSubmit)="cadastrar()">
           <label for="chk" aria-hidden="true">Cadastro</label>
-          <input type="text" formControlName="usuario" placeholder="Usuário" required>
-          <input type="email" formControlName="email" placeholder="Email" required>
-          <input type="text" formControlName="cpf" placeholder="CPF" required>
-          <input style="margin-bottom: 50px;" type="password" formControlName="senha" placeholder="Senha" required>
+          <input type="text" formControlName="name" placeholder="Usuário" required>
+          <input type="email" formControlName="username" placeholder="Email" required>
+          <input type="text" formControlName="documentNumber" placeholder="CPF" required>
+          <input style="margin-bottom: 50px;" type="password" formControlName="password" placeholder="Senha" required>
  
           <button type="submit">Realizar cadastro</button>
           <br>
@@ -28,8 +28,8 @@
       <div class="login">
         <form [formGroup]="loginForm" (ngSubmit)="login()">
           <label for="chk" aria-hidden="true">Login</label>
-          <input type="email" formControlName="usuario" placeholder="Usuário" required="">
-          <input type="password" formControlName="senha" placeholder="Senha" required="">
+          <input type="email" formControlName="name" placeholder="Usuário" required="">
+          <input type="password" formControlName="password" placeholder="Senha" required="">
           <button type="submit">Login</button>
           <a href="#" class="esqueciSenha" (click)="esqueciSenha()">Esqueci minha senha</a>
         </form>
