@@ -49,7 +49,9 @@ export class LoginComponent implements OnInit {
       };
       this.usuarioService.loginUser(userData).subscribe({
         next: (response) => {
-          sessionStorage.setItem('userId', response.userId);
+          if(response.userId){
+            sessionStorage.setItem('userId', response.userId);
+          }
           this.router.navigate(['/cadastro-pet']);
           console.log('Login realizado com sucesso!', response);
         },
