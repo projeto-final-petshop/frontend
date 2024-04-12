@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   cadastrar() {
     if (this.cadastroForm.valid) {
       console.log(this.cadastroForm.value)

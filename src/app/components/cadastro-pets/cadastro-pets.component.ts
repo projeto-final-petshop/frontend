@@ -15,12 +15,12 @@ export class CadastroPetsComponent implements OnInit {
 
   constructor(private cadastroPetsService: CadastroPetsService) {
     this.cadastroPetsForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      age: new FormControl('', [Validators.required, Validators.min(0)]),
-      color: new FormControl('', Validators.required),
+      name: new FormControl(''),
+      age: new FormControl('', [ Validators.min(0)]),
+      color: new FormControl('',),
       breed: new FormControl(''),
-      animalType: new FormControl('', Validators.required),
-      birthdate: new FormControl('', Validators.required),
+      animalType: new FormControl(''),
+      birthdate: new FormControl(''),
     });
   }
 
