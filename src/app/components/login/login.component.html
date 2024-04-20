@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title></title>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
-</head>
 <body>
   <div class="main">    
     <input type="checkbox" id="chk" aria-hidden="true">
@@ -13,10 +7,17 @@
           <label for="chk" aria-hidden="true">Cadastro</label>
           <input type="text" formControlName="name" placeholder="Usuário" required>
           <input type="email" formControlName="username" placeholder="Email" required>
-          <input type="text" formControlName="documentNumber" placeholder="CPF" required>
+          <div *ngIf="cadastroForm.get('username')?.touched || cadastroForm.get('username')?.dirty">
+            <div *ngIf="cadastroForm.get('username')?.errors?.['email']">
+              <p class="error-message">Por favor, insira um endereço de e-mail válido.</p>
+            </div>
+          
+          </div>
+          <input type="text" formControlName="documentNumber" appCpfFormat placeholder="CPF">
+
           <input style="margin-bottom: 50px;" type="password" formControlName="password" placeholder="Senha" required>
  
-          <button type="submit">Realizar cadastro</button>
+          <button [disabled]="!cadastroForm.valid" type="submit">Realizar cadastro</button>
           <br>
           <br>
           <br>
@@ -28,7 +29,7 @@
       <div class="login">
         <form [formGroup]="loginForm" (ngSubmit)="login()">
           <label for="chk" aria-hidden="true">Login</label>
-          <input type="email" formControlName="name" placeholder="Usuário" required="">
+          <input type="email" formControlName="name" placeholder="Usuário" required="true">
           <input type="password" formControlName="password" placeholder="Senha" required="">
           <button type="submit">Login</button>
           <a href="#" class="esqueciSenha" (click)="esqueciSenha()">Esqueci minha senha</a>
@@ -36,4 +37,3 @@
       </div>
   </div>
 </body>
-</html>

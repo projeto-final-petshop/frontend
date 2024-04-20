@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { UsuarioService } from '../../services/usuario.service';
 import { Router } from '@angular/router';
 
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(private usuarioService: UsuarioService, private router: Router) { 
     this.cadastroForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
-      username: new FormControl('', [Validators.required, Validators.email]),
+      username: new FormControl('', [Validators.required, Validators.email,]),
       password: new FormControl('', [Validators.required]),
       documentNumber: new FormControl('', [Validators.required])
     });
@@ -58,6 +58,17 @@ export class LoginComponent implements OnInit {
         error: (error) => console.error('Erro ao realizar login', error)
       });
     }
+  }
+
+  emailDomainValidator(domainName: string): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const email = control.value;
+      const domain = email.substring(email.lastIndexOf("@") + 1);
+      if (email === '' || domain.toLowerCase() === domainName.toLowerCase()) {
+        return null;
+      }
+      return { 'emailDomain': true };
+    };
   }
 
   esqueciSenha(){

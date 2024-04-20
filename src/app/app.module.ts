@@ -7,13 +7,16 @@ import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CadastroPetsComponent } from './components/cadastro-pets/cadastro-pets.component';
+import { CpfFormatDirective } from './directives/cpf-format.directive';
+import { PerfilClienteComponent } from './components/perfil-cliente/perfil-cliente.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     CadastroPetsComponent,
-    
+    CpfFormatDirective,
+    PerfilClienteComponent
   ],
   imports: [
     BrowserModule,
