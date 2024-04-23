@@ -15,24 +15,22 @@
           </div>
           <input type="text" formControlName="documentNumber" appCpfFormat placeholder="CPF">
 
-          <input style="margin-bottom: 50px;" type="password" formControlName="password" placeholder="Senha" required>
+          <input style="margin-bottom: 30px;" type="password" formControlName="password" placeholder="Senha" required>
  
-          <button [disabled]="!cadastroForm.valid" type="submit">Realizar cadastro</button>
-          <br>
-          <br>
-          <br>
-          <br>
+          <button style="margin-bottom: 10px !important;" [disabled]="!cadastroForm.valid" type="submit">Realizar cadastro</button>
+ 
           
         </form>
       </div>
 
       <div class="login">
         <form [formGroup]="loginForm" (ngSubmit)="login()">
-          <label for="chk" aria-hidden="true">Login</label>
+          <label  for="chk" aria-hidden="true"> <p style="margin-top: 10px;">Login</p></label>
           <input type="email" formControlName="name" placeholder="Usuário" required="true">
           <input type="password" formControlName="password" placeholder="Senha" required="">
           <button type="submit">Login</button>
-          <a href="#" class="esqueciSenha" (click)="esqueciSenha()">Esqueci minha senha</a>
+          <a  href="#" class="esqueciSenha" (click)="esqueciSenha()">Esqueci minha senha</a>
+          
         </form>
       </div>
   </div>
