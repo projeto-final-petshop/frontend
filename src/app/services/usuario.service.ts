@@ -27,4 +27,15 @@ export class UsuarioService {
     });
     return this.http.post(this.loginUrl, userData, { headers });
   }
+  
+  updateUser(userId: number, userData: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.put(`${this.baseUrl}/${userId}`, userData, { headers });
+  }
+
+  getUserById(userId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/${userId}`);
+  }
 }

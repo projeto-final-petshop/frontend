@@ -49,10 +49,10 @@ export class LoginComponent implements OnInit {
       };
       this.usuarioService.loginUser(userData).subscribe({
         next: (response) => {
-          if(response.userId){
-            sessionStorage.setItem('userId', response.userId);
+          if(response.id){
+            sessionStorage.setItem('userId', response.id);
           }
-          this.router.navigate(['/cadastro-pet']);
+          this.router.navigate(['/perfil-cliente']);
           console.log('Login realizado com sucesso!', response);
         },
         error: (error) => console.error('Erro ao realizar login', error)

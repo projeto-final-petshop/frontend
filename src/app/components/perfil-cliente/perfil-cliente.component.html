@@ -1,32 +1,52 @@
 <div class="fundo">
-  <aside class="profile-card" >
-      <header>
+  <aside class="profile-card">
+    <header>
+      <!-- <a target="_blank" href="#">
 
-        <a target="_blank" href="#">
-         
-        </a>
-    
+      </a> -->
+      <h1 style="color: blueviolet; margin-top: 40px;">Perfil do usuário</h1>
+      <br>
+      <h2>{{userName}}</h2>
+    </header>
 
-        <h1>
-                Perfil do usuário
-              </h1>
-    
+    <div class="profile-container">
+      <form [formGroup]="userDataForm" (ngSubmit)="updateUser()">
+        <div class="form-group">
+          <label for="username">Email:</label>
+          <div class="input-wrapper">
+            <input type="email" id="username" formControlName="username" class="form-input" >
+            <span class="icon" (click)="toggleEdit('username')">&#9998;</span>
+          </div>
+        </div>
 
-        <h2>
-                nomeUsuario
-              </h2>
-    
-      </header>
-    
-      <!-- bit of a bio; who are you? -->
-      <div class="profile-bio">
-    
-        <p>
-         aqui voce pode consultar seus dados e editá-los se desejar
-        </p>
-    
-      </div>
-    
- 
-    </aside>
+        <div class="form-group">
+          <label for="name">Nome:</label>
+          <div class="input-wrapper">
+            <input type="text" id="name" formControlName="name" class="form-input" >
+            <span class="icon" (click)="toggleEdit('name')">&#9998;</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="documentNumber">CPF:</label>
+          <div class="input-wrapper">
+            <input type="text" id="documentNumber" formControlName="documentNumber" class="form-input" >
+            <span class="icon" (click)="toggleEdit('documentNumber')">&#9998;</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Senha:</label>
+          <input type="password" id="password" formControlName="password" class="form-input">
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirmar Senha:</label>
+          <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-input">
+        </div>
+
+        <button type="submit" class="btn btn-save">Salvar Alterações</button>
+      </form>
+    </div>
+  </aside>
 </div>
