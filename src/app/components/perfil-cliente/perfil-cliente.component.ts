@@ -48,6 +48,7 @@ export class PerfilClienteComponent implements OnInit {
   loadUserData(userId: number): void {
     this.usuarioService.getUserById(userId).subscribe({
       next: (userData) => {
+        this.userName = userData.username;
         this.userDataForm = this.formBuilder.group({
           username: [{ value: userData.username, disabled: true }, Validators.required],
           name: [{ value: userData.name, disabled: true }, Validators.required],
