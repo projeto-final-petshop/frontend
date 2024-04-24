@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
     this.cadastroForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       username: new FormControl('', [Validators.required, Validators.email,]),
-      password: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required, this.passwordStrengthValidator()]),
       documentNumber: new FormControl('', [Validators.required])
     });
     this.loginForm = new FormGroup({
@@ -73,5 +73,22 @@ export class LoginComponent implements OnInit {
 
   esqueciSenha(){
     
+  }
+
+  passwordStrengthValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value || '';
+      const hasUpperCase = /[A-Z]+/.test(value);
+      const hasLowerCase = /[a-z]+/.test(value);
+      const hasNumeric = /[0-9]+/.test(value);
+      const hasSpecial = /[\W_]+/.test(value); 
+      const isValidLength = value.length >= 8;
+      if (hasUpperCase && hasLowerCase && hasNumeric && hasSpecial && isValidLength) {
+        return null;
+      }
+      return {
+        passwordStrength: 'Password must be at least 8 characters long, include at least one uppercase letter, one number, and one special character.'
+      };
+    };
   }
 }

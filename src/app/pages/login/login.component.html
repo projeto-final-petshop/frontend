@@ -5,7 +5,7 @@
       <div class="signup">
         <form [formGroup]="cadastroForm" (ngSubmit)="cadastrar()">
           <label for="chk" aria-hidden="true">Cadastro</label>
-          <input type="text" formControlName="name" placeholder="Usuário" required>
+          <input type="text" formControlName="name" placeholder="Nome" required>
           <input type="email" formControlName="username" placeholder="Email" required>
           <div *ngIf="cadastroForm.get('username')?.touched || cadastroForm.get('username')?.dirty">
             <div *ngIf="cadastroForm.get('username')?.errors?.['email']">
@@ -15,17 +15,22 @@
           </div>
           <input type="text" formControlName="documentNumber" appCpfFormat placeholder="CPF">
 
-          <input style="margin-bottom: 30px;" type="password" formControlName="password" placeholder="Senha" required>
- 
+          <input type="password" formControlName="password" placeholder="Senha" required>
+        <div style="padding-top: 10px !important; padding-bottom: 10px;">
+          <p  *ngIf="cadastroForm.get('password')?.value?.length > 0 && cadastroForm.get('password')?.errors?.['passwordStrength']" class="error-message">Para sua segurança, sua senha deve conter letras maiúsculas, minúsculas, números e caracteres especiais.</p>
+        </div>
           <button style="margin-bottom: 10px !important;" [disabled]="!cadastroForm.valid" type="submit">Realizar cadastro</button>
- 
+
           
         </form>
       </div>
 
       <div class="login">
         <form [formGroup]="loginForm" (ngSubmit)="login()">
-          <label  for="chk" aria-hidden="true"> <p style="margin-top: 10px;">Login</p></label>
+       
+            <label  style="padding-top: 40px !important;" for="chk" aria-hidden="true"> <p >Login</p></label>
+          
+          
           <input type="email" formControlName="name" placeholder="Usuário" required="true">
           <input type="password" formControlName="password" placeholder="Senha" required="">
           <button type="submit">Login</button>

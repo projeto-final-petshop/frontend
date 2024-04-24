@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialog } from 'src/app/components/dialog/dialog.component';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 
@@ -10,7 +12,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class PerfilClienteComponent implements OnInit {
   userName: string = 'teste'
-  userId: number = 1
+  userId!: number;
   userDataForm!: FormGroup;
   
   userData = {
@@ -22,7 +24,7 @@ export class PerfilClienteComponent implements OnInit {
     updatedAt: '2024-04-15T13:15:27.65681'
   };
 
-  constructor(private formBuilder: FormBuilder, private usuarioService: UsuarioService) { }
+  constructor(private formBuilder: FormBuilder, private usuarioService: UsuarioService,    private dialog: MatDialog) { }
   ngOnInit(): void {
     this.createUserDataForm();
     const storedUserId = sessionStorage.getItem('userId');
@@ -32,7 +34,7 @@ export class PerfilClienteComponent implements OnInit {
     } else {
       console.log('Nenhum userId encontrado no sessionStorage.');
     }
-    this.loadUserData(this.userId);
+    // this.loadUserData(this.userId);
   }
 
   createUserDataForm(){
@@ -84,6 +86,30 @@ export class PerfilClienteComponent implements OnInit {
     } else {
       this.userDataForm.get(field)?.disable();
     }
+  }
+
+  openDeleteConfirmDialog(): void {
+    const dialogRef = this.dialog.open(ConfirmDialog, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteUser();
+      }
+    });
+  }
+
+  deleteUser(): void {
+    this.usuarioService.deleteUser(this.userId).subscribe({
+      next: () => {
+        console.log('Usuário excluído com sucesso.');
+        // Aqui você pode adicionar lógica para redirecionar ou atualizar a vista
+      },
+      error: (error) => {
+        console.error('Erro ao excluir o usuário', error);
+      }
+    });
   }
 
 }

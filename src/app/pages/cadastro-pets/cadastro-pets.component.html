@@ -4,8 +4,8 @@
 
       <div class="signup">
         <form [formGroup]="cadastroPetsForm" (ngSubmit)="cadastrar()">
-          <label for="chk" aria-hidden="true">Cadastro de Pets</label>
-        
+          <label for="chk" aria-hidden="true">Cadastre seu</label>
+          <label style="margin-top: -20px !important;" for="chk" aria-hidden="true">PET</label>
           <input type="text" formControlName="name" placeholder="Nome do Pet" required>
           <input type="number" formControlName="age" placeholder="Idade do Pet" required>
           <input type="text" formControlName="color" placeholder="Cor do Pet" required>

@@ -7,9 +7,14 @@
       <h1 style="color: blueviolet; margin-top: 40px;">Perfil do usuário</h1>
       <br>
       <h2>{{userName}}</h2>
+     
+
+
     </header>
 
+
     <div class="profile-container">
+     
       <form [formGroup]="userDataForm" (ngSubmit)="updateUser()">
         <div class="form-group">
           <label for="username">Email:</label>
@@ -46,6 +51,7 @@
         </div>
 
         <button type="submit" class="btn btn-save">Salvar Alterações</button>
+        <button mat-button class="delete" (click)="openDeleteConfirmDialog()">Apagar conta</button>
       </form>
     </div>
   </aside>

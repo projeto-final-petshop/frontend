@@ -38,4 +38,8 @@ export class UsuarioService {
   getUserById(userId: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${userId}`);
   }
+
+  deleteUser(userId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${userId}`);
+  }
 }
