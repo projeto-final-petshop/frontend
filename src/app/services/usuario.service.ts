@@ -10,7 +10,7 @@ export class UsuarioService {
   private baseUrl = 'http://localhost:8888/api/v1/users';
   private registerUrl = `${this.baseUrl}/register`;
 
-  private loginUrl = `${this.baseUrl}/login`; 
+  private loginUrl = `${this.baseUrl}/auth/login`; 
 
   constructor(private http: HttpClient) { }
 
