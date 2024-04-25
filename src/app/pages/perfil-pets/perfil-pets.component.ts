@@ -46,52 +46,52 @@ export class PerfilPetsComponent implements OnInit {
   loadUserDataAndPets(userId: number): void {
 
     // MOCK PARA PAGINA DE PERFIL PET COM DOIS PETS.
-    const mockData = {
-      id: 1,
-      name: "Mirella Gabrielly da Rocha",
-      pets: [
-        {
-          id: 1,
-          name: "Rex",
-          breed: "Golden Retriever",
-          color: "Golden",
-          animalType: "Dog",
-          birthdate: "31/12/2020",
-          createdAt: "2024-04-15T13:15:39",
-          updatedAt: "2024-04-15T13:15:39"
-        },
-        {
-          id: 2,
-          name: "Fluffy",
-          breed: "Persian",
-          color: "White",
-          animalType: "Cat",
-          birthdate: "01/01/2021",
-          createdAt: "2024-04-15T13:20:00",
-          updatedAt: "2024-04-15T13:20:00"
-        }
-      ]
-    }    
-    this.pets = mockData.pets;
-      if (this.pets.length > 0) {
-          this.selectedPetIndex = 0;
-          this.populatePetDataForm(this.pets[this.selectedPetIndex]);
-        }
-    
-    // this.petService.getUserAndPets(userId).subscribe({
-      
-    //   next: (data: any) => {
-        
-    //     this.pets = data.pets;
-    //     if (this.pets.length > 0) {
+    // const mockData = {
+    //   id: 1,
+    //   name: "Mirella Gabrielly da Rocha",
+    //   pets: [
+    //     {
+    //       id: 1,
+    //       name: "Rex",
+    //       breed: "Golden Retriever",
+    //       color: "Golden",
+    //       animalType: "Dog",
+    //       birthdate: "31/12/2020",
+    //       createdAt: "2024-04-15T13:15:39",
+    //       updatedAt: "2024-04-15T13:15:39"
+    //     },
+    //     {
+    //       id: 2,
+    //       name: "Fluffy",
+    //       breed: "Persian",
+    //       color: "White",
+    //       animalType: "Cat",
+    //       birthdate: "01/01/2021",
+    //       createdAt: "2024-04-15T13:20:00",
+    //       updatedAt: "2024-04-15T13:20:00"
+    //     }
+    //   ]
+    // }    
+    // this.pets = mockData.pets;
+    //   if (this.pets.length > 0) {
     //       this.selectedPetIndex = 0;
     //       this.populatePetDataForm(this.pets[this.selectedPetIndex]);
     //     }
-    //   },
-    //   error: (error: any) => {
-    //     console.error('Erro ao carregar os dados do usuário e pets', error);
-    //   }
-    // });
+    
+    this.petService.getUserAndPets(userId).subscribe({
+      
+      next: (data: any) => {
+        
+        this.pets = data.pets;
+        if (this.pets.length > 0) {
+          this.selectedPetIndex = 0;
+          this.populatePetDataForm(this.pets[this.selectedPetIndex]);
+        }
+      },
+      error: (error: any) => {
+        console.error('Erro ao carregar os dados do usuário e pets', error);
+      }
+    });
   }
 
   populatePetDataForm(pet: any): void {
