@@ -4,7 +4,7 @@
 
       <div class="signup">
         <form [formGroup]="cadastroForm" (ngSubmit)="cadastrar()">
-          <label for="chk" aria-hidden="true">Cadastro</label>
+          <label for="chk"  (click)="esqueciSenha(false)" aria-hidden="true">Cadastro</label>
           <input type="text" formControlName="name" placeholder="Nome" required>
           <input type="email" formControlName="username" placeholder="Email" required>
           <div *ngIf="cadastroForm.get('username')?.touched || cadastroForm.get('username')?.dirty">
@@ -27,15 +27,20 @@
 
       <div class="login">
         <form [formGroup]="loginForm" (ngSubmit)="login()">
-       
-            <label  style="padding-top: 40px !important;" for="chk" aria-hidden="true"> <p >Login</p></label>
-          
-          
+        <div *ngIf="!isForgetPassword">
+          <label  style="padding-top: 40px !important;" for="chk" aria-hidden="true"> <p >Login</p></label>
           <input type="email" formControlName="name" placeholder="Usuário" required="true">
           <input type="password" formControlName="password" placeholder="Senha" required="">
           <button type="submit">Login</button>
-          <a  href="#" class="esqueciSenha" (click)="esqueciSenha()">Esqueci minha senha</a>
+          <a  class="esqueciSenha" href="#" (click)="esqueciSenha(true); $event.preventDefault()">Esqueci minha senha</a>
+        </div>
           
+          <div *ngIf="isForgetPassword">
+            <label *ngIf="isForgetPassword" style="padding-top: 40px !important;" for="chk" aria-hidden="true"> <p >Esqueci a senha</p></label>
+          <p style="padding: 30px;"> Digite seu CPF e enviaremos um email para que você possa redefinir sua senha </p>
+            <input type="text" formControlName="documentNumber" appCpfFormat placeholder="CPF">
+            <a    class="esqueciSenha" href="#" (click)="esqueciSenha(false); $event.preventDefault()">Realizar login</a>
+          </div>
         </form>
       </div>
   </div>

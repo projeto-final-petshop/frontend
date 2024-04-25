@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { ConfirmDialog } from 'src/app/components/dialog/dialog.component';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
@@ -24,7 +25,7 @@ export class PerfilClienteComponent implements OnInit {
     updatedAt: '2024-04-15T13:15:27.65681'
   };
 
-  constructor(private formBuilder: FormBuilder, private usuarioService: UsuarioService,    private dialog: MatDialog) { }
+  constructor(private formBuilder: FormBuilder, private usuarioService: UsuarioService,    private dialog: MatDialog, private router: Router) { }
   ngOnInit(): void {
     this.createUserDataForm();
     const storedUserId = sessionStorage.getItem('userId');
@@ -110,6 +111,10 @@ export class PerfilClienteComponent implements OnInit {
         console.error('Erro ao excluir o usuário', error);
       }
     });
+  }
+
+  redirect(route : string){
+    this.router.navigate([route]);
   }
 
 }

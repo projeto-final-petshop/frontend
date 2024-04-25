@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CadastroPetsService } from 'src/app/services/cadastro-pets.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
@@ -13,7 +14,7 @@ export class CadastroPetsComponent implements OnInit {
   cadastroPetsForm: FormGroup;
   userId!: Number;
 
-  constructor(private cadastroPetsService: CadastroPetsService) {
+  constructor(private cadastroPetsService: CadastroPetsService, private router: Router) {
     this.cadastroPetsForm = new FormGroup({
       name: new FormControl(''),
       age: new FormControl('', [ Validators.min(0)]),
@@ -27,7 +28,9 @@ export class CadastroPetsComponent implements OnInit {
 
   ngOnInit(): void {
     const userId = sessionStorage.getItem('userId');
-    this.userId = userId ? Number(userId) : 0;
+    if(userId){
+      this.userId = +userId
+    }
   }
   
 
@@ -48,4 +51,8 @@ export class CadastroPetsComponent implements OnInit {
     }
   }
   
+  redirect(route : string){
+    this.router.navigate([route]);
+  }
+
 }

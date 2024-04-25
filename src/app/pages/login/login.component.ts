@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   cadastroForm: FormGroup;
   loginForm: FormGroup;
+  isForgetPassword!: boolean;
 
   constructor(private usuarioService: UsuarioService, private router: Router) { 
     this.cadastroForm = new FormGroup({
@@ -71,9 +72,11 @@ export class LoginComponent implements OnInit {
     };
   }
 
-  esqueciSenha(){
-    
+  esqueciSenha(isForgetPassword : boolean){
+    this.isForgetPassword = isForgetPassword;
   }
+
+  
 
   passwordStrengthValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
