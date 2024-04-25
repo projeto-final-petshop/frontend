@@ -21,7 +21,8 @@ export class PerfilPetsComponent implements OnInit {
   ngOnInit(): void {
     // this.createPetDataForm();
     // this.loadUserDataAndPets(1)
-    const storedUserId = '1';
+
+    const storedUserId = sessionStorage.getItem('userId');
     if (storedUserId) {
       this.userId = +storedUserId;
       this.loadUserDataAndPets(1);
