@@ -1,0 +1,30 @@
+<body>
+  <div class="main">    
+    <input type="checkbox" id="chk" aria-hidden="true">
+
+      <div class="signup">
+        <form [formGroup]="cadastroPetsForm" (ngSubmit)="cadastrar()">
+          <label for="chk" aria-hidden="true">Cadastre seu</label>
+          <label style="margin-top: -20px !important;" for="chk" aria-hidden="true">PET</label>
+          <div style="justify-content: center; padding: 20px; color: white"  *ngIf="!userId">
+            Você não está logado.  <a href="#" style="color: rgb(186, 0, 233);" (click)="redirect('login'); $event.preventDefault()">clique aqui para realizar seu login.</a>
+          </div>
+          <div *ngIf="userId">
+            <input type="text" formControlName="name" placeholder="Nome do Pet" required>
+            <input type="number" formControlName="age" placeholder="Idade do Pet" required>
+            <input type="text" formControlName="color" placeholder="Cor do Pet" required>
+            <input type="text" formControlName="breed" placeholder="Raça do Pet (Opcional)">
+            <input type="text" formControlName="animalType" placeholder="Tipo de Animal" required>
+            <input type="date" formControlName="birthdate" placeholder="Data de Nascimento" required>
+            
+            <button type="submit" [disabled]="!cadastroPetsForm.valid">Realizar cadastro</button>
+           
+            <br><br><br><br>
+          </div>
+     
+        </form>
+       
+      </div>
+  
+  </div>
+</body>
