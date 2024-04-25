@@ -1,9 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './pages/login/login.component';
+import { CadastroPetsComponent } from './pages/cadastro-pets/cadastro-pets.component';
+import { CpfFormatDirective } from './directives/cpf-format.directive';
+import { PerfilClienteComponent } from './pages/perfil-cliente/perfil-cliente.component';
+import { PerfilPetsComponent } from './pages/perfil-pets/perfil-pets.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
+  {path: 'cadastro-pet', component: CadastroPetsComponent},
+  {path: 'perfil-cliente', component: PerfilClienteComponent},
+  {path: 'pets', component: PerfilPetsComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 
