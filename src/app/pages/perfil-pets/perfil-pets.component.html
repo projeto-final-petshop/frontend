@@ -6,7 +6,7 @@
         <option *ngFor="let pet of pets; let i = index" [value]="i" [selected]="i === selectedPetIndex">{{ pet.name }}</option>
         
       </select>
-      <button class="add-item-btn">+</button>
+      <button (click)="redirect('cadastro-pet');" style="margin-left: 4px;" class="add-item-btn"><p>+</p></button>
       
     </header>
   
