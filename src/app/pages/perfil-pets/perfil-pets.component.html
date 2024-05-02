@@ -41,7 +41,7 @@
             <input type="date" id="birthdate" formControlName="birthdate" class="form-input">
         </div>
 
-        <button type="submit" class="btn btn-save">Salvar Alterações</button>
+        <button type="submit" [disabled]="!petDataForm.valid" class="btn btn-save">Salvar Alterações</button>
         <button type="button" class="delete" (click)="openDeleteConfirmDialog()">Excluir Pet</button>
       </form>
     </div>
