@@ -33,7 +33,6 @@ export class PerfilClienteComponent implements OnInit {
       this.userId = +storedUserId; 
       this.loadUserData(this.userId);
     } else {
-      this.createUserDataForm();
       console.log('Nenhum userId encontrado no sessionStorage.');
     }
     // this.loadUserData(this.userId);
@@ -41,9 +40,9 @@ export class PerfilClienteComponent implements OnInit {
 
   createUserDataForm(){
     this.userDataForm = this.formBuilder.group({
-      username: [{ value: this.userData.username, disabled: true }, Validators.required],
-      name: [{ value: this.userData.name, disabled: true }, Validators.required],
-      documentNumber: [{ value: this.userData.documentNumber, disabled: true }, Validators.required],
+      username: [{ value: '', disabled: true }, Validators.required],
+      name: [{ value: '', disabled: true }, Validators.required],
+      documentNumber: [{ value: '', disabled: true }, Validators.required],
       password: [{ value: '', disabled: false }, Validators.required],
       confirmPassword: [{ value: '', disabled: false }, Validators.required]
     });
