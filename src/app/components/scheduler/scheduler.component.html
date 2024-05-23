@@ -1,0 +1,17 @@
+<div class="scheduler">
+    <div class="day-column" *ngFor="let day of getDaysOfWeek()">
+      <div class="day-header">{{ day | date: 'EEEE, d MMMM' : 'pt-BR' }}</div>
+      <div class="appointments">
+        <div *ngFor="let appointment of getAppointmentsForDay(day)" class="appointment">
+          <div class="appointment-title">{{ appointment.title }}</div>
+          <div class="appointment-time">
+            {{ appointment.start | date: 'h:mm a' : 'pt-BR' }} - {{ appointment.end | date: 'h:mm a' : 'pt-BR' }}
+          </div>
+          <div class="appointment-participants">
+            {{ appointment.participants.join(', ') }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

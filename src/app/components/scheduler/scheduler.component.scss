@@ -1,0 +1,56 @@
+.scheduler {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #f8f9fa;
+  
+    .day-column {
+      flex: 1;
+      margin: 5px;
+      background-color: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+      .day-header {
+        background-color: #007bff;
+        color: #ffffff;
+        padding: 10px;
+        text-align: center;
+        font-weight: bold;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        font-size: 1.1em;
+      }
+  
+      .appointments {
+        padding: 10px;
+  
+        .appointment {
+          background-color: #e1e1ff;
+          margin: 10px 0;
+          padding: 10px;
+          border-radius: 5px;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+          transition: transform 0.2s;
+  
+          &:hover {
+            transform: scale(1.02);
+          }
+  
+          .appointment-title {
+            font-weight: bold;
+            color: #007bff;
+          }
+  
+          .appointment-time,
+          .appointment-participants {
+            font-size: 0.9em;
+            color: #555;
+          }
+        }
+      }
+    }
+  }
+  

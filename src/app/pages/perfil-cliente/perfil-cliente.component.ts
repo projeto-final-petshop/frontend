@@ -40,9 +40,9 @@ export class PerfilClienteComponent implements OnInit {
 
   createUserDataForm(){
     this.userDataForm = this.formBuilder.group({
-      username: [{ value: '', disabled: true }, Validators.required],
+      email: [{ value: '', disabled: true }, Validators.required],
       name: [{ value: '', disabled: true }, Validators.required],
-      documentNumber: [{ value: '', disabled: true }, Validators.required],
+      cpf: [{ value: '', disabled: true }, Validators.required],
       password: [{ value: '', disabled: false }, Validators.required],
       confirmPassword: [{ value: '', disabled: false }, Validators.required]
     });
@@ -53,9 +53,9 @@ export class PerfilClienteComponent implements OnInit {
       next: (userData) => {
         this.userName = userData.username;
         this.userDataForm = this.formBuilder.group({
-          username: [{ value: userData.username, disabled: true }, Validators.required],
+          email: [{ value: userData.username, disabled: true }, Validators.required],
           name: [{ value: userData.name, disabled: true }, Validators.required],
-          documentNumber: [{ value: userData.documentNumber, disabled: true }, Validators.required],
+          cpf: [{ value: userData.documentNumber, disabled: true }, Validators.required],
           password: [{ value: '', disabled: false }, Validators.required],
           confirmPassword: [{ value: '', disabled: false }, Validators.required]
         });

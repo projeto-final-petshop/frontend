@@ -5,12 +5,14 @@ import { CadastroPetsComponent } from './pages/cadastro-pets/cadastro-pets.compo
 import { CpfFormatDirective } from './directives/cpf-format.directive';
 import { PerfilClienteComponent } from './pages/perfil-cliente/perfil-cliente.component';
 import { PerfilPetsComponent } from './pages/perfil-pets/perfil-pets.component';
+import { PainelComponent } from './pages/painel/painel.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'cadastro-pet', component: CadastroPetsComponent},
   {path: 'perfil-cliente', component: PerfilClienteComponent},
   {path: 'pets', component: PerfilPetsComponent},
+  {path: 'painel', component: PainelComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 
