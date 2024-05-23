@@ -50,8 +50,8 @@ export class LoginComponent implements OnInit {
       };
       this.usuarioService.loginUser(userData).subscribe({
         next: (response) => {
-          if(response.id){
-            sessionStorage.setItem('userId', response.id);
+          if(response.token){
+            sessionStorage.setItem('userId', response.token);
             this.router.navigate(['/perfil-cliente']);
           }
           
