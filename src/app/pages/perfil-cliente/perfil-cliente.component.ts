@@ -13,24 +13,20 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class PerfilClienteComponent implements OnInit {
   userName: string = 'teste'
-  userId!: number;
+  userId!: any;
   userDataForm!: FormGroup;
-  
-  userData = {
-    id: 1,
-    username: 'mirella.gabrielly.darocha@jmmarcenaria.com.br',
-    name: 'Mirella Gabrielly da Rocha',
-    documentNumber: '83747383408',
-    createdAt: '2024-04-15T13:15:27.65681',
-    updatedAt: '2024-04-15T13:15:27.65681'
-  };
 
-  constructor(private formBuilder: FormBuilder, private usuarioService: UsuarioService,    private dialog: MatDialog, private router: Router) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private usuarioService: UsuarioService,
+    private dialog: MatDialog,
+    private router: Router) { }
   ngOnInit(): void {
     this.createUserDataForm();
     const storedUserId = sessionStorage.getItem('userId');
     if (storedUserId) {
-      this.userId = +storedUserId; 
+      this.userId = storedUserId;
+
       this.loadUserData(this.userId);
     } else {
       console.log('Nenhum userId encontrado no sessionStorage.');
@@ -43,19 +39,22 @@ export class PerfilClienteComponent implements OnInit {
       email: [{ value: '', disabled: true }, Validators.required],
       name: [{ value: '', disabled: true }, Validators.required],
       cpf: [{ value: '', disabled: true }, Validators.required],
+      phoneNumber: [{ value: '', disabled: true }, Validators.required],
       password: [{ value: '', disabled: false }, Validators.required],
       confirmPassword: [{ value: '', disabled: false }, Validators.required]
     });
   }
 
-  loadUserData(userId: number): void {
+  loadUserData(userId: any): void {
     this.usuarioService.getUserById(userId).subscribe({
       next: (userData) => {
+        console.log(userData)
         this.userName = userData.username;
         this.userDataForm = this.formBuilder.group({
-          email: [{ value: userData.username, disabled: true }, Validators.required],
+          email: [{ value: userData.email, disabled: true }, Validators.required],
           name: [{ value: userData.name, disabled: true }, Validators.required],
-          cpf: [{ value: userData.documentNumber, disabled: true }, Validators.required],
+          cpf: [{ value: userData.cpf, disabled: true }, Validators.required],
+          phoneNumber: [{ value: userData.phoneNumber, disabled: true }, Validators.required],
           password: [{ value: '', disabled: false }, Validators.required],
           confirmPassword: [{ value: '', disabled: false }, Validators.required]
         });

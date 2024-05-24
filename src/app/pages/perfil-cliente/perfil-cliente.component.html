@@ -7,20 +7,20 @@
       <h1 style="color: blueviolet; margin-top: 40px;">Perfil do usuário</h1>
       <br>
       <h2>{{userName}}</h2>
-     
+
 
       <button mat-button class="pets" (click)="redirect('pets')">Meus pets</button>
     </header>
 
 
     <div class="profile-container">
-     
+
       <form [formGroup]="userDataForm" (ngSubmit)="updateUser()">
         <div class="form-group">
-          <label for="username">Email:</label>
+          <label for="email">Email:</label>
           <div class="input-wrapper">
-            <input type="email" id="username" formControlName="username" class="form-input" >
-            <span class="icon" (click)="toggleEdit('username')">&#9998;</span>
+            <input type="email" id="email" formControlName="email" class="form-input" >
+            <span class="icon" (click)="toggleEdit('email')">&#9998;</span>
           </div>
         </div>
 
@@ -33,10 +33,18 @@
         </div>
 
         <div class="form-group">
-          <label for="documentNumber">CPF:</label>
+          <label for="cpf">CPF:</label>
           <div class="input-wrapper">
-            <input type="text" id="documentNumber" formControlName="documentNumber" class="form-input" >
-            <span class="icon" (click)="toggleEdit('documentNumber')">&#9998;</span>
+            <input type="text" id="cpf" formControlName="cpf" class="form-input" >
+            <span class="icon" (click)="toggleEdit('cpf')">&#9998;</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="phoneNumber">Número de Telefone:</label>
+          <div class="input-wrapper">
+            <input type="tel" id="cpf" formControlName="phoneNumber" class="form-input" >
+            <span class="icon" (click)="toggleEdit('phoneNumber')">&#9998;</span>
           </div>
         </div>
 

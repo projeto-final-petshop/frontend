@@ -1,27 +1,28 @@
 <body>
-  <div class="main">    
+  <div class="main">
     <input type="checkbox" id="chk" aria-hidden="true">
 
       <div class="signup">
         <form [formGroup]="cadastroForm" (ngSubmit)="cadastrar()">
           <label for="chk"  (click)="esqueciSenha(false)" aria-hidden="true">Cadastro</label>
           <input type="text" formControlName="name" placeholder="Nome" required>
-          <input type="email" formControlName="username" placeholder="Email" required>
-          <div *ngIf="cadastroForm.get('username')?.touched || cadastroForm.get('username')?.dirty">
-            <div *ngIf="cadastroForm.get('username')?.errors?.['email']">
-              <p class="error-message">Por favor, insira um endereço de e-mail válido.</p>
+          <input type="email" formControlName="email" placeholder="Email" required>
+          <div *ngIf="cadastroForm.get('email')?.touched || cadastroForm.get('email')?.dirty">
+            <div *ngIf="cadastroForm.get('email')?.errors?.['email']">
+              <p class="error-message">
+                Por favor, insira um endereço de e-mail válido.</p>
             </div>
-          
           </div>
           <input type="text" formControlName="cpf" appCpfFormat placeholder="CPF">
-
+          <input type="tel" formControlName="phoneNumber" placeholder="Número de Telefone" required>
           <input type="password" formControlName="password" placeholder="Senha" required>
         <div style="padding-top: 10px !important; padding-bottom: 10px;">
-          <p  *ngIf="cadastroForm.get('password')?.value?.length > 0 && cadastroForm.get('password')?.errors?.['passwordStrength']" class="error-message">Para sua segurança, sua senha deve conter letras maiúsculas, minúsculas, números e caracteres especiais.</p>
+          <p  *ngIf="cadastroForm.get('password')?.value?.length > 0 && cadastroForm.get('password')?.errors?.['passwordStrength']" class="error-message">
+            Para sua segurança, sua senha deve conter letras maiúsculas, minúsculas, números e caracteres especiais.</p>
         </div>
           <button style="margin-bottom: 10px !important;" [disabled]="!cadastroForm.valid" type="submit">Realizar cadastro</button>
 
-          
+
         </form>
       </div>
 
@@ -29,12 +30,12 @@
         <form [formGroup]="loginForm" (ngSubmit)="login()">
         <div *ngIf="!isForgetPassword">
           <label  style="padding-top: 40px !important;" for="chk" aria-hidden="true"> <p >Login</p></label>
-          <input type="email" formControlName="name" placeholder="Usuário" required="true">
+          <input type="email" formControlName="email" placeholder="Usuário" required="true">
           <input type="password" formControlName="password" placeholder="Senha" required="">
           <button type="submit">Login</button>
           <a  class="esqueciSenha" href="#" (click)="esqueciSenha(true); $event.preventDefault()">Esqueci minha senha</a>
         </div>
-          
+
           <div *ngIf="isForgetPassword">
             <label *ngIf="isForgetPassword" style="padding-top: 40px !important;" for="chk" aria-hidden="true"> <p >Esqueci a senha</p></label>
           <p style="padding: 30px;"> Digite seu CPF e enviaremos um email para que você possa redefinir sua senha </p>

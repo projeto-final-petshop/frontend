@@ -14,15 +14,16 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isForgetPassword!: boolean;
 
-  constructor(private usuarioService: UsuarioService, private router: Router) { 
+  constructor(private usuarioService: UsuarioService, private router: Router) {
     this.cadastroForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
-      username: new FormControl('', [Validators.required, Validators.email,]),
+      email: new FormControl('', [Validators.required, Validators.email,]),
       password: new FormControl('', [Validators.required, this.passwordStrengthValidator()]),
-      cpf: new FormControl('', [Validators.required])
+      cpf: new FormControl('', [Validators.required]),
+      phoneNumber: new FormControl('', [Validators.required])
     });
     this.loginForm = new FormGroup({
-      name: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required])
     });
   }
@@ -45,16 +46,17 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.loginForm.valid) {
       const userData = {
-        username: this.loginForm.value.email,
-        password: this.loginForm.value.senha
+        email: this.loginForm.value.email,
+        password: this.loginForm.value.password
       };
+
       this.usuarioService.loginUser(userData).subscribe({
         next: (response) => {
           if(response.token){
             sessionStorage.setItem('userId', response.token);
             this.router.navigate(['/perfil-cliente']);
           }
-          
+
           console.log('Login realizado com sucesso!', response);
         },
         error: (error) => console.error('Erro ao realizar login', error)
@@ -77,7 +79,7 @@ export class LoginComponent implements OnInit {
     this.isForgetPassword = isForgetPassword;
   }
 
-  
+
 
   passwordStrengthValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -85,7 +87,7 @@ export class LoginComponent implements OnInit {
       const hasUpperCase = /[A-Z]+/.test(value);
       const hasLowerCase = /[a-z]+/.test(value);
       const hasNumeric = /[0-9]+/.test(value);
-      const hasSpecial = /[\W_]+/.test(value); 
+      const hasSpecial = /[\W_]+/.test(value);
       const isValidLength = value.length >= 8;
       if (hasUpperCase && hasLowerCase && hasNumeric && hasSpecial && isValidLength) {
         return null;
