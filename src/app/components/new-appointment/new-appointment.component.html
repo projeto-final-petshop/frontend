@@ -1,0 +1,34 @@
+<div class="new-appointment-container">
+    <h2>Novo Agendamento</h2>
+    <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="pet">Pet</label>
+            <select id="pet" formControlName="pet">
+              <option value="">Selecione</option>
+              <option value="gato">Gato</option>
+              <option value="cachorro">Cachorro</option>
+            </select>
+          </div>
+      <div class="form-group">
+        <label for="service">Serviço</label>
+        <select id="service" formControlName="service">
+          <option value="">Selecione</option>
+          <option value="banho">Banho</option>
+          <option value="tosa">Tosa</option>
+          <option value="banho e tosa">Banho e Tosa</option>
+          <option value="veterinario">Veterinário</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="startTime">Horário de Início</label>
+        <input type="time" id="startTime" formControlName="startTime">
+      </div>
+    
+      <div class="form-group">
+        <label for="endTime">Horário de Término</label>
+        <input type="time" id="endTime" [value]="endTime" disabled>
+      </div>
+      <button type="submit" [disabled]="appointmentForm.invalid">Salvar</button>
+    </form>
+  </div>
+  

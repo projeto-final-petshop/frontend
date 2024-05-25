@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PainelComponent implements OnInit {
 
+  activeItem: number = 0;
+  
   constructor() { }
 
   ngOnInit(): void {
   }
 
+
+
+  setActive(index: number) {
+    this.activeItem = index;
+  }
 }

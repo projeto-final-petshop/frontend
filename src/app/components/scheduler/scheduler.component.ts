@@ -18,8 +18,10 @@ export class SchedulerComponent implements OnInit {
 
 
   appointments: Appointment[] = [];
+  currentWeekStart: Date = this.getStartOfWeek(new Date());
 
   ngOnInit() {
+    this.currentWeekStart = this.getStartOfWeek(new Date());
     this.appointments = [
       {
         id: 1,
@@ -38,12 +40,17 @@ export class SchedulerComponent implements OnInit {
     ];
   }
 
+  getStartOfWeek(date: Date): Date {
+    const day = date.getDay();
+    const diff = date.getDate() - day + (day === 0 ? -6 : 1); // Adjust when day is sunday
+    return new Date(date.setDate(diff));
+  }
+
   getDaysOfWeek(): Date[] {
     const days = [];
-    const today = new Date();
-    const startOfWeek = today.getDate() - today.getDay() + 1; 
+    const startOfWeek = new Date(this.currentWeekStart);
     for (let i = 0; i < 7; i++) {
-      days.push(new Date(today.setDate(startOfWeek + i)));
+      days.push(new Date(startOfWeek.setDate(startOfWeek.getDate() + (i === 0 ? 0 : 1))));
     }
     return days;
   }
@@ -52,5 +59,13 @@ export class SchedulerComponent implements OnInit {
     return this.appointments.filter(appointment =>
       appointment.start.toDateString() === day.toDateString()
     );
+  }
+
+  previousWeek() {
+    this.currentWeekStart = new Date(this.currentWeekStart.setDate(this.currentWeekStart.getDate() - 7));
+  }
+
+  nextWeek() {
+    this.currentWeekStart = new Date(this.currentWeekStart.setDate(this.currentWeekStart.getDate() + 7));
   }
 }

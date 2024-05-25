@@ -1,2 +1,90 @@
-<app-scheduler></app-scheduler>
 
+
+<body>
+    <main>
+        <nav class="main-menu">
+            <h1>PetConnect</h1>
+            <img class="logo" src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/4cfdcb5a-0137-4457-8be1-6e7bd1f29ebb" alt="" />
+            <ul>
+              <li class="nav-item" [ngClass]="{'active': activeItem === 0}" (click)="setActive(0)">
+                <b></b>
+                <b></b>
+                <a >
+                  <i class="fa fa-house nav-icon"></i>
+                  <span class="nav-text">Banho e tosa</span>
+                </a>
+              </li>
+              <li class="nav-item" [ngClass]="{'active': activeItem === 1}" (click)="setActive(1)">
+                <b></b>
+                <b></b>
+                <a >
+                  <i class="fa fa-user nav-icon"></i>
+                  <span class="nav-text">Veterinario</span>
+                </a>
+              </li>
+              <li class="nav-item" [ngClass]="{'active': activeItem === 2}" (click)="setActive(2)">
+                <b></b>
+                <b></b>
+                <a >
+                  <i class="fa fa-calendar-check nav-icon"></i>
+                  <span class="nav-text">Agendar</span>
+           
+                </a>
+              </li>
+              <li class="nav-item" [ngClass]="{'active': activeItem === 3}" (click)="setActive(3)">
+                <b></b>
+                <b></b>
+                <a >
+                  <i class="fa fa-person-running nav-icon"></i>
+                  <span class="nav-text">Meu pet</span>
+                </a>
+              </li>
+              <!-- <li class="nav-item" [ngClass]="{'active': activeItem === 4}" (click)="setActive(4)">
+                <b></b>
+                <b></b>
+                <a >
+                  <i class="fa fa-sliders nav-icon"></i>
+                  <span class="nav-text">Settings</span>
+                </a>
+              </li> -->
+            </ul>
+          </nav>
+          
+
+      <div class="content">
+        
+        <div class="left-content">
+            
+          <div *ngIf="activeItem === 0 || activeItem ===1" class="activities" style="width: 100% !important;">
+             <p *ngIf="activeItem === 0">Banho e tosa</p>
+             <p *ngIf="activeItem === 1">Veterinário</p>
+            
+            <app-scheduler></app-scheduler>
+            
+      
+          </div>
+          
+          <div *ngIf="activeItem === 2">
+            <app-new-appointment></app-new-appointment>
+          </div>
+
+          <div *ngIf="activeItem === 3">
+            <div style="text-align: center; margin-top: 50px;">
+                <h1>PetConnect</h1>
+                <h2>seu pet sempre bem cuidado.</h2>
+            </div>
+            <div style="text-align: center; padding-left: 450px !important; margin-top: 250px;">
+                <app-dog></app-dog>
+            </div>
+           
+          </div>
+
+      
+
+         
+        </div>
+
+      
+    </div>
+    </main>
+  </body>

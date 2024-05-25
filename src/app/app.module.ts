@@ -18,6 +18,8 @@ import { PainelComponent } from './pages/painel/painel.component';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import localePtExtra from '@angular/common/locales/extra/pt';
+import { NewAppointmentComponent } from './components/new-appointment/new-appointment.component';
+import { DogComponent } from './components/dog/dog.component';
 
 
 registerLocaleData(localePt, 'pt-BR', localePtExtra); 
@@ -32,6 +34,8 @@ registerLocaleData(localePt, 'pt-BR', localePtExtra);
     ConfirmDialog,
     SchedulerComponent,
     PainelComponent,
+    NewAppointmentComponent,
+    DogComponent,
     
   ],
   imports: [
