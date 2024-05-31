@@ -28,15 +28,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   cadastrar() {
     if (this.cadastroForm.valid) {
-      console.log(this.cadastroForm.value)
       this.usuarioService.registerUser(this.cadastroForm.value).subscribe({
         next: (response) => {
-          console.log('Usuário cadastrado com sucesso!', response)
+          console.log('Usuário cadastrado com sucesso!', response);
         },
         error: (error) => console.error('Erro ao cadastrar usuário', error)
       });
@@ -52,11 +50,10 @@ export class LoginComponent implements OnInit {
 
       this.usuarioService.loginUser(userData).subscribe({
         next: (response) => {
-          if(response.token){
-            sessionStorage.setItem('userId', response.token);
+          if (response.token) {
+            localStorage.setItem('token', response.token);
             this.router.navigate(['/perfil-cliente']);
           }
-
           console.log('Login realizado com sucesso!', response);
         },
         error: (error) => console.error('Erro ao realizar login', error)
@@ -75,11 +72,9 @@ export class LoginComponent implements OnInit {
     };
   }
 
-  esqueciSenha(isForgetPassword : boolean){
+  esqueciSenha(isForgetPassword: boolean) {
     this.isForgetPassword = isForgetPassword;
   }
-
-
 
   passwordStrengthValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {

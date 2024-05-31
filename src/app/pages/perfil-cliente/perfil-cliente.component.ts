@@ -46,7 +46,7 @@ export class PerfilClienteComponent implements OnInit {
   }
 
   loadUserData(userId: any): void {
-    this.usuarioService.getUserById(userId).subscribe({
+    this.usuarioService.getUserById().subscribe({
       next: (userData) => {
         console.log(userData)
         this.userName = userData.username;

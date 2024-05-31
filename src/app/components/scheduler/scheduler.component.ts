@@ -1,13 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-
-interface Appointment {
-  id: number;
-  title: string;
-  start: Date;
-  end: Date;
-  participants: string[];
-}
-
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-scheduler',
@@ -15,34 +6,39 @@ interface Appointment {
   styleUrls: ['./scheduler.component.scss']
 })
 export class SchedulerComponent implements OnInit {
-
-
-  appointments: Appointment[] = [];
+  @Input() appointments: any[] = [];
   currentWeekStart: Date = this.getStartOfWeek(new Date());
+
+  constructor() {}
 
   ngOnInit() {
     this.currentWeekStart = this.getStartOfWeek(new Date());
-    this.appointments = [
-      {
-        id: 1,
-        title: 'Banho',
-        start: new Date(2024, 4, 20, 8, 0),
-        end: new Date(2024, 4, 20, 9, 0),
-        participants: ['user']
-      },
-      {
-        id: 2,
-        title: 'Banho e tosa',
-        start: new Date(2024, 4, 21, 15, 0),
-        end: new Date(2024, 4, 21, 16, 0),
-        participants: ['user']
-      }
-    ];
+    // this.appointments = [
+    //   {
+    //     id: 1,
+    //     title: 'Banho',
+    //     start: new Date(2024, 4, 20, 8, 0),
+    //     end: new Date(2024, 4, 20, 9, 0),
+    //     participants: ['user']
+    //   },
+    //   {
+    //     id: 2,
+    //     title: 'Banho e tosa',
+    //     start: new Date(2024, 4, 21, 15, 0),
+    //     end: new Date(2024, 4, 21, 16, 0),
+    //     participants: ['user']
+    //   }
+    // ];
+
+  }
+  
+  ngOnChanges(){
+    console.log(this.appointments)
   }
 
   getStartOfWeek(date: Date): Date {
     const day = date.getDay();
-    const diff = date.getDate() - day + (day === 0 ? -6 : 1); // Adjust when day is sunday
+    const diff = date.getDate() - day + (day === 0 ? -6 : 1); // Ajusta quando o dia é domingo
     return new Date(date.setDate(diff));
   }
 
@@ -55,9 +51,9 @@ export class SchedulerComponent implements OnInit {
     return days;
   }
 
-  getAppointmentsForDay(day: Date): Appointment[] {
+  getAppointmentsForDay(day: Date): any[] {
     return this.appointments.filter(appointment =>
-      appointment.start.toDateString() === day.toDateString()
+      new Date(appointment.appointmentDate).toDateString() === day.toDateString()
     );
   }
 

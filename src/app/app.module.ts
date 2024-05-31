@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CadastroPetsComponent } from './pages/cadastro-pets/cadastro-pets.component';
 import { CpfFormatDirective } from './directives/cpf-format.directive';
 import { PerfilClienteComponent } from './pages/perfil-cliente/perfil-cliente.component';
@@ -20,6 +20,10 @@ import localePt from '@angular/common/locales/pt';
 import localePtExtra from '@angular/common/locales/extra/pt';
 import { NewAppointmentComponent } from './components/new-appointment/new-appointment.component';
 import { DogComponent } from './components/dog/dog.component';
+import { AuthInterceptor } from './interceptors/auth-interceptor.service';
+import { UsuarioService } from './services/usuario.service';
+import { CadastroPetsService } from './services/cadastro-pets.service';
+import { PetService } from './services/pets.service';
 
 
 registerLocaleData(localePt, 'pt-BR', localePtExtra); 
@@ -49,7 +53,15 @@ registerLocaleData(localePt, 'pt-BR', localePtExtra);
     
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'pt-BR' }
+    UsuarioService,
+    CadastroPetsService,
+    PetService,
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

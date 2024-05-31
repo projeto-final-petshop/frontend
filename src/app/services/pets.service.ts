@@ -1,41 +1,38 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class PetService {
 
-  private baseUrl = 'http://localhost:8888/api/v1';
+  private baseUrl = 'http://localhost:8888/api/v1/pets'; // URL base da API
 
   constructor(private http: HttpClient) { }
 
   registerPet(petData: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/pets/register`, petData);
+    return this.http.post<any>(`${this.baseUrl}/create`, petData);
   }
 
   updatePet(petId: number, petData: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/pets/${petId}`, petData);
+    return this.http.put<any>(`${this.baseUrl}/${petId}`, petData);
   }
 
   getPetById(petId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/pets/${petId}`);
+    return this.http.get<any>(`${this.baseUrl}/admin/${petId}`);
   }
 
-  deletePet(petId: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/pets/${petId}`);
+  deletePet(petId: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${petId}`);
   }
 
-  listPets(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/pets/list`);
+  listPets(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl);
   }
 
-  getUserAndPets(token: number,): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-  
-    return this.http.get(`${this.baseUrl}/users/pets`, { headers });
+  getAllPets(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/list-all`);
   }
 }

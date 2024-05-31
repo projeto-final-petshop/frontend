@@ -79,8 +79,7 @@ export class PerfilPetsComponent implements OnInit {
     //       this.populatePetDataForm(this.pets[this.selectedPetIndex]);
     //     }
     
-    this.petService.getUserAndPets(userId).subscribe({
-      
+    this.petService.getAllPets().subscribe({
       next: (data: any) => {
         
         this.pets = data.pets;
