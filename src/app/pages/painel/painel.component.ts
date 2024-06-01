@@ -18,45 +18,37 @@ export class PainelComponent implements OnInit {
   }
 
   loadAppointments() {
-      this.appointments = [
-      // {
-      //   id: 1,
-      //   petId: 10,
-      //  serviceType: "BATH_AND_GROOMING",
-      //   start: new Date(2024, 4, 20, 8, 0),
-      //   end: new Date(2024, 4, 20, 9, 0),
-      //   participants: ['user']
-      // },
-      {
-        petId: 10,
-        userId: 10,
-        serviceType: "BATH_AND_GROOMING",
-        petType: "DOG",
-        appointmentDate:  new Date(2024, 4, 29, 8, 0),
-        appointmentTime: "10:00",
-        status: "SCHEDULED",
-        appointmentId: 10
-      },
-      {
-        petId: 10,
-        userId: 10,
-        serviceType: "BATH_AND_GROOMING",
-        petType: "DOG",
-        appointmentDate:  new Date(2024, 4, 28, 8, 0),
-        appointmentTime: "10:00",
-        status: "SCHEDULED",
-        appointmentId: 10
-      }
-    ];
-
-    // this.appointmentService.getAppointments().subscribe(
-    //   (data: any[]) => {
-    //     this.appointments = data;
+    //   this.appointments = [
+    //   {
+    //     petId: 10,
+    //     userId: 10,
+    //     serviceType: "BATH_AND_GROOMING",
+    //     petType: "DOG",
+    //     appointmentDate:  new Date(2024, 4, 29, 8, 0),
+    //     appointmentTime: "10:00",
+    //     status: "SCHEDULED",
+    //     appointmentId: 10
     //   },
-    //   (error: any) => {
-    //     console.error('Erro ao carregar agendamentos', error);
+    //   {
+    //     petId: 10,
+    //     userId: 10,
+    //     serviceType: "BATH_AND_GROOMING",
+    //     petType: "DOG",
+    //     appointmentDate:  new Date(2024, 4, 28, 8, 0),
+    //     appointmentTime: "10:00",
+    //     status: "SCHEDULED",
+    //     appointmentId: 10
     //   }
-    // );
+    // ];
+
+    this.appointmentService.getAppointments().subscribe(
+      (data: any[]) => {
+        this.appointments = data;
+      },
+      (error: any) => {
+        console.error('Erro ao carregar agendamentos', error);
+      }
+    );
   }
 
   setActive(index: number) {
