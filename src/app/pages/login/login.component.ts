@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
       this.usuarioService.loginUser(userData).subscribe({
         next: (response) => {
           if (response.token) {
+            localStorage.setItem('userId', response.token);
             localStorage.setItem('token', response.token);
             this.router.navigate(['/perfil-cliente']);
           }
