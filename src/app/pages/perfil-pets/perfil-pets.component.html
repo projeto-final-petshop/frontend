@@ -7,7 +7,7 @@
         
       </select>
       <button (click)="redirect('cadastro-pet');" style="margin-left: 4px;" class="add-item-btn"><p>+</p></button>
-      
+      <button mat-button class="pets arrow-left" (click)="redirect('painel')">Voltar ao painel</button>
     </header>
   
     <div class="profile-container" *ngIf="petDataForm">

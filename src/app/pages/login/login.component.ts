@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
           console.log('Usuário cadastrado com sucesso!', response);
           localStorage.setItem('userId', response.token);
           localStorage.setItem('token', response.token);
-          this.router.navigate(['/perfil-cliente']);
+          this.router.navigate(['/painel']);
         },
         error: (error) => {
           console.error('Erro ao cadastrar usuário', error);
@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
             this.errorMessage = null;
             localStorage.setItem('userId', response.token);
             localStorage.setItem('token', response.token);
-            this.router.navigate(['/perfil-cliente']);
+            this.router.navigate(['/painel']);
           }
           console.log('Login realizado com sucesso!', response);
         },

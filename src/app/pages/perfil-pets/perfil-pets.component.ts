@@ -14,7 +14,7 @@ export class PerfilPetsComponent implements OnInit {
   petDataForm!: FormGroup;
   pets: any[] = [];
   selectedPetIndex: number = 0;
-  userId!: number;
+  userId: any;
 
   constructor(private formBuilder: FormBuilder, private petService: PetService, private dialog: MatDialog, private router: Router) { }
 
@@ -22,9 +22,10 @@ export class PerfilPetsComponent implements OnInit {
     // this.createPetDataForm();
     // this.loadUserDataAndPets(1)
 
-    const storedUserId = localStorage.getItem('userId');
+    const storedUserId = 'teste';
+    this.pets = ['1', '2']
     if (storedUserId) {
-      this.userId = +storedUserId;
+      this.userId = storedUserId;
       this.loadUserDataAndPets(1);
     } else {
       console.log('Nenhum userId encontrado no sessionStorage.');

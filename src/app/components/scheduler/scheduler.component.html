@@ -1,29 +1,25 @@
-<div class="scheduler-container" style="width: 900px !important;"> 
-    <button class="nav-button" (click)="previousWeek()">
-      &#8592; Semana Anterior
-    </button>
-    <div class="scheduler">
-      <div class="day-column" *ngFor="let day of getDaysOfWeek()">
-        <div class="day-header">{{ day | date: 'EEEE, d MMMM' : 'pt-BR' }}</div>
-        <div class="appointments">
-          <div *ngFor="let appointment of getAppointmentsForDay(day)" class="appointment">
-            <div class="appointment-title">{{ appointment.title }}</div>
-          
-            <div class="appointment-participants">
-              Serviço: {{ appointment.serviceType }}
-
-             
-              <!-- {{ appointment.serviceType.join(', ') }} -->
-            </div>
-            <div class="appointment-time">
-              Horário: {{ appointment.appointmentTime }}
-            </div>
+<div class="scheduler-container" style="width: 900px !important;">
+  <button class="nav-button" (click)="previousWeek()">
+    &#8592; Semana Anterior
+  </button>
+  <div class="scheduler">
+    <div class="day-column" *ngFor="let day of getDaysOfWeek()">
+      <div class="day-header">{{ day | date: 'EEEE, d MMMM' : 'pt-BR' }}</div>
+      <div class="appointments">
+        <div *ngFor="let appointment of getAppointmentsForDay(day)" class="appointment">
+          <div class="appointment-title">{{ appointment.title }}</div>
+          <div class="appointment-participants">
+            Serviço: {{ appointment.serviceType }}
           </div>
+          <div class="appointment-time">
+            Horário: {{ appointment.appointmentTime }}
+          </div>
+          <button (click)="editAppointment(appointment.appointmentId)">Editar</button>
         </div>
       </div>
     </div>
-    <button class="nav-button" (click)="nextWeek()">
-      Próxima Semana &#8594;
-    </button>
   </div>
-  
+  <button class="nav-button" (click)="nextWeek()">
+    Próxima Semana &#8594;
+  </button>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-scheduler',
@@ -7,33 +7,39 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SchedulerComponent implements OnInit {
   @Input() appointments: any[] = [];
+  @Output() editAppointmentEvent = new EventEmitter<number>();
   currentWeekStart: Date = this.getStartOfWeek(new Date());
 
   constructor() {}
 
   ngOnInit() {
     this.currentWeekStart = this.getStartOfWeek(new Date());
-    // this.appointments = [
-    //   {
-    //     id: 1,
-    //     title: 'Banho',
-    //     start: new Date(2024, 4, 20, 8, 0),
-    //     end: new Date(2024, 4, 20, 9, 0),
-    //     participants: ['user']
-    //   },
-    //   {
-    //     id: 2,
-    //     title: 'Banho e tosa',
-    //     start: new Date(2024, 4, 21, 15, 0),
-    //     end: new Date(2024, 4, 21, 16, 0),
-    //     participants: ['user']
-    //   }
-    // ];
-
+    this.appointments = [
+      {
+        petId: 10,
+        userId: 10,
+        serviceType: "BATH_AND_GROOMING",
+        petType: "DOG",
+        appointmentDate: new Date(2024, 4, 29, 8, 0),
+        appointmentTime: "10:00",
+        status: "SCHEDULED",
+        appointmentId: 10
+      },
+      {
+        petId: 10,
+        userId: 10,
+        serviceType: "BATH_AND_GROOMING",
+        petType: "DOG",
+        appointmentDate: new Date(2024, 4, 28, 8, 0),
+        appointmentTime: "10:00",
+        status: "SCHEDULED",
+        appointmentId: 11
+      }
+    ];
   }
-  
-  ngOnChanges(){
-    console.log(this.appointments)
+
+  ngOnChanges() {
+    console.log(this.appointments);
   }
 
   getStartOfWeek(date: Date): Date {
@@ -63,5 +69,9 @@ export class SchedulerComponent implements OnInit {
 
   nextWeek() {
     this.currentWeekStart = new Date(this.currentWeekStart.setDate(this.currentWeekStart.getDate() + 7));
+  }
+
+  editAppointment(appointmentId: number) {
+    this.editAppointmentEvent.emit(appointmentId);
   }
 }
