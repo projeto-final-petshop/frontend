@@ -36,7 +36,7 @@ export class UsuarioService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    return this.http.put(`${this.baseUrl}/${userId}`, userData, { headers });
+    return this.http.put(`${this.baseUrl}/update`, userData, { headers });
   }
 
   getUserById(): Observable<any> {
@@ -44,6 +44,6 @@ export class UsuarioService {
   }
 
   deleteUser(userId: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${userId}`);
+    return this.http.delete(`${this.baseUrl}/delete`);
   }
 }

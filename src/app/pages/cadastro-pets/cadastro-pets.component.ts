@@ -12,7 +12,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 export class CadastroPetsComponent implements OnInit {
 
   cadastroPetsForm: FormGroup;
-  userId!: Number;
+  token: any;
 
   constructor(private cadastroPetsService: CadastroPetsService, private router: Router) {
     this.cadastroPetsForm = new FormGroup({
@@ -27,16 +27,16 @@ export class CadastroPetsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    const userId = sessionStorage.getItem('userId');
-    if(userId){
-      this.userId = +userId
+    const token = localStorage.getItem('token');
+    if(token){
+      this.token = token
     }
   }
   
 
   cadastrar() {
     if (this.cadastroPetsForm.valid) {
-      const formValues = { ...this.cadastroPetsForm.value, userId: this.userId };
+      const formValues = { ...this.cadastroPetsForm.value };
   
       this.cadastroPetsService.registerPet(formValues).subscribe({
         next: (response) => {

@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   cadastroForm: FormGroup;
   loginForm: FormGroup;
   isForgetPassword!: boolean;
+  errorMessage: string | null = null;
 
   constructor(private usuarioService: UsuarioService, private router: Router) {
     this.cadastroForm = new FormGroup({
@@ -34,9 +35,17 @@ export class LoginComponent implements OnInit {
     if (this.cadastroForm.valid) {
       this.usuarioService.registerUser(this.cadastroForm.value).subscribe({
         next: (response) => {
+          this.errorMessage = null;
+          this.cadastroForm.reset();
           console.log('Usuário cadastrado com sucesso!', response);
+          localStorage.setItem('userId', response.token);
+          localStorage.setItem('token', response.token);
+          this.router.navigate(['/perfil-cliente']);
         },
-        error: (error) => console.error('Erro ao cadastrar usuário', error)
+        error: (error) => {
+          console.error('Erro ao cadastrar usuário', error);
+          this.errorMessage = 'Erro ao cadastrar usuário. Por favor, tente novamente.';
+        }
       });
     }
   }
@@ -51,13 +60,18 @@ export class LoginComponent implements OnInit {
       this.usuarioService.loginUser(userData).subscribe({
         next: (response) => {
           if (response.token) {
+            this.errorMessage = null;
             localStorage.setItem('userId', response.token);
             localStorage.setItem('token', response.token);
             this.router.navigate(['/perfil-cliente']);
           }
           console.log('Login realizado com sucesso!', response);
         },
-        error: (error) => console.error('Erro ao realizar login', error)
+        error: (error) => {
+          console.error('Erro ao cadastrar usuário', error);
+          this.errorMessage = 'Erro ao realizar login. Por favor, tente novamente.'; 
+        }
+        
       });
     }
   }

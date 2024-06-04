@@ -23,7 +23,7 @@ export class PerfilClienteComponent implements OnInit {
     private router: Router) { }
   ngOnInit(): void {
     this.createUserDataForm();
-    const storedUserId = sessionStorage.getItem('userId');
+    const storedUserId = localStorage.getItem('token');
     if (storedUserId) {
       this.userId = storedUserId;
 
@@ -104,12 +104,18 @@ export class PerfilClienteComponent implements OnInit {
     this.usuarioService.deleteUser(this.userId).subscribe({
       next: () => {
         console.log('Usuário excluído com sucesso.');
-        // Aqui você pode adicionar lógica para redirecionar ou atualizar a vista
+        this.clearLocalStorage();
+        this.router.navigate(['/login']);
       },
       error: (error) => {
         console.error('Erro ao excluir o usuário', error);
       }
     });
+  }
+
+  clearLocalStorage(): void {
+    localStorage.removeItem('userId');
+    localStorage.removeItem('token');
   }
 
   redirect(route : string){

@@ -22,7 +22,7 @@ export class PerfilPetsComponent implements OnInit {
     // this.createPetDataForm();
     // this.loadUserDataAndPets(1)
 
-    const storedUserId = sessionStorage.getItem('userId');
+    const storedUserId = localStorage.getItem('userId');
     if (storedUserId) {
       this.userId = +storedUserId;
       this.loadUserDataAndPets(1);

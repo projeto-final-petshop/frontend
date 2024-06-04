@@ -43,6 +43,7 @@ export class PainelComponent implements OnInit {
 
     this.appointmentService.getAppointments().subscribe(
       (data: any[]) => {
+        console.log(data)
         this.appointments = data;
       },
       (error: any) => {

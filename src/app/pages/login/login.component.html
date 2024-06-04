@@ -20,9 +20,10 @@
           <p  *ngIf="cadastroForm.get('password')?.value?.length > 0 && cadastroForm.get('password')?.errors?.['passwordStrength']" class="error-message">
             Para sua segurança, sua senha deve conter letras maiúsculas, minúsculas, números e caracteres especiais.</p>
         </div>
+        <div *ngIf="errorMessage">
+          <p class="error-message">{{ errorMessage }}</p>
+        </div>
           <button style="margin-bottom: 10px !important;" [disabled]="!cadastroForm.valid" type="submit">Realizar cadastro</button>
-
-
         </form>
       </div>
 
@@ -40,6 +41,9 @@
             <label *ngIf="isForgetPassword" style="padding-top: 40px !important;" for="chk" aria-hidden="true"> <p >Esqueci a senha</p></label>
           <p style="padding: 30px;"> Digite seu CPF e enviaremos um email para que você possa redefinir sua senha </p>
             <input type="text" formControlName="documentNumber" appCpfFormat placeholder="CPF">
+            <div *ngIf="errorMessage">
+              <p class="error-message">{{ errorMessage }}</p>
+            </div>
             <a    class="esqueciSenha" href="#" (click)="esqueciSenha(false); $event.preventDefault()">Realizar login</a>
           </div>
         </form>
