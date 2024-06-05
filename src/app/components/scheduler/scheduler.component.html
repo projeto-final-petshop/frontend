@@ -9,12 +9,12 @@
         <div *ngFor="let appointment of getAppointmentsForDay(day)" class="appointment">
           <div class="appointment-title">{{ appointment.title }}</div>
           <div class="appointment-participants">
-            Serviço: {{ appointment.serviceType }}
+            Serviço: {{ getDisplayServiceType(appointment.serviceType) }}
           </div>
           <div class="appointment-time">
             Horário: {{ appointment.appointmentTime }}
           </div>
-          <button (click)="editAppointment(appointment.appointmentId)">Editar</button>
+          <button style="max-height: 10px; margin-top: 10px;" class="nav-button" (click)="editAppointment(appointment.appointmentId)">Editar</button>
         </div>
       </div>
     </div>

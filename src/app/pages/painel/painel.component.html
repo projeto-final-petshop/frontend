@@ -20,11 +20,12 @@
         </div>
       </div>
       <h1>PetConnect</h1>
+      <h4 *ngIf="!isAdmin" style="color: rgb(225, 0, 255); margin-left: 35%;">Visão admin</h4>
       
    
 
       <ul>
-        <li class="nav-item" [ngClass]="{'active': activeItem === 0}" (click)="setActive(0)">
+        <li class="nav-item"  [ngClass]="{'active': activeItem === 0}" (click)="setActive(0); filterAppointments()">
           <b></b>
           <b></b>
           <a >
@@ -32,7 +33,7 @@
             <span class="nav-text">Banho e tosa</span>
           </a>
         </li>
-        <li class="nav-item" [ngClass]="{'active': activeItem === 1}" (click)="setActive(1)">
+        <li class="nav-item" [ngClass]="{'active': activeItem === 1}" (click)="setActive(1); filterVeterinarianAppointments()">
           <b></b>
           <b></b>
           <a >
@@ -48,11 +49,11 @@
             <span class="nav-text">Agendar</span>
           </a>
         </li>
-        <li class="nav-item" [ngClass]="{'active': activeItem === 3}" (click)="setActive(3)">
+        <li class="nav-item" *ngIf="!isAdmin" [ngClass]="{'active': activeItem === 3}" (click)="setActive(3)">
           <b></b>
           <b></b>
           <a >
-            <i class="fa fa-person-running nav-icon">teste</i>
+            <i class="fa fa-person-running nav-icon">Pet</i>
             <span class="nav-text">Meu pet</span>
           </a>
         </li>
@@ -63,13 +64,13 @@
       <div class="left-content">
         <div *ngIf="activeItem === 0" class="activities">
           <p *ngIf="activeItem === 0">Banho e tosa</p>
-          <app-scheduler (editAppointmentEvent)="onEditAppointment($event)" [appointments]="appointments"></app-scheduler>
+          <app-scheduler (editAppointmentEvent)="onEditAppointment($event)" [appointments]="filteredAppointments"></app-scheduler>
         </div>
 
 
         <div *ngIf="activeItem === 1">
           <p *ngIf="activeItem === 1">Veterinário</p>
-          <app-scheduler (editAppointmentEvent)="onEditAppointment($event)" [appointments]="appointments"></app-scheduler>
+          <app-scheduler (editAppointmentEvent)="onEditAppointment($event)" [appointments]="filteredAppointments"></app-scheduler>
         </div>
 
 

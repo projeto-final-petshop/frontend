@@ -14,28 +14,28 @@ export class SchedulerComponent implements OnInit {
 
   ngOnInit() {
     this.currentWeekStart = this.getStartOfWeek(new Date());
-    this.appointments = [
-      {
-        petId: 10,
-        userId: 10,
-        serviceType: "BATH_AND_GROOMING",
-        petType: "DOG",
-        appointmentDate: new Date(2024, 4, 29, 8, 0),
-        appointmentTime: "10:00",
-        status: "SCHEDULED",
-        appointmentId: 10
-      },
-      {
-        petId: 10,
-        userId: 10,
-        serviceType: "BATH_AND_GROOMING",
-        petType: "DOG",
-        appointmentDate: new Date(2024, 4, 28, 8, 0),
-        appointmentTime: "10:00",
-        status: "SCHEDULED",
-        appointmentId: 11
-      }
-    ];
+    // this.appointments = [
+    //   {
+    //     petId: 10,
+    //     userId: 10,
+    //     serviceType: "BATH_AND_GROOMING",
+    //     petType: "DOG",
+    //     appointmentDate: new Date(2024, 4, 29, 8, 0),
+    //     appointmentTime: "10:00",
+    //     status: "SCHEDULED",
+    //     appointmentId: 10
+    //   },
+    //   {
+    //     petId: 10,
+    //     userId: 10,
+    //     serviceType: "BATH_AND_GROOMING",
+    //     petType: "DOG",
+    //     appointmentDate: new Date(2024, 4, 28, 8, 0),
+    //     appointmentTime: "10:00",
+    //     status: "SCHEDULED",
+    //     appointmentId: 11
+    //   }
+    // ];
   }
 
   ngOnChanges() {
@@ -73,5 +73,20 @@ export class SchedulerComponent implements OnInit {
 
   editAppointment(appointmentId: number) {
     this.editAppointmentEvent.emit(appointmentId);
+  }
+
+  getDisplayServiceType(serviceType: string): string {
+    switch (serviceType) {
+      case 'BATH':
+        return 'Banho';
+      case 'BATH_AND_GROOMING':
+        return 'Banho e Tosa';
+      case 'GROOMING':
+        return 'Tosa';
+      case 'VETERINARIAN':
+        return 'Veterinário';
+      default:
+        return serviceType;
+    }
   }
 }

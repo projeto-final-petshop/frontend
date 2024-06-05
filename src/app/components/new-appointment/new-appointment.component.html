@@ -1,5 +1,5 @@
 <div class="new-appointment-container">
-  <h2>{{ isEditMode ? 'Editar Agendamento' : 'Novo Agendamento' }}</h2>
+  <h2 style="color: blueviolet;">{{ isEditMode ? 'Editar Agendamento' : 'Novo Agendamento' }}</h2>
   <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="pet">Pet</label>

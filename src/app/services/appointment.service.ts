@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class AppointmentService {
   private apiUrl = 'http://localhost:8888/api/v1/appointments'; // URL base da API
+  private adminApiUrl = 'http://localhost:8888/api/v1/admins/appointments'; // URL base para administradores
 
   constructor(private http: HttpClient) { }
 
@@ -32,5 +33,9 @@ export class AppointmentService {
 
   cancelAppointment(appointmentId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/cancel/${appointmentId}`);
+  }
+
+  getAdminAppointments(): Observable<any> {
+    return this.http.get<any>(`${this.adminApiUrl}/all`);
   }
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { UsuarioService } from '../../services/usuario.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialog } from 'src/app/components/dialog/dialog.component';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,7 @@ export class LoginComponent implements OnInit {
   isForgetPassword!: boolean;
   errorMessage: string | null = null;
 
-  constructor(private usuarioService: UsuarioService, private router: Router) {
+  constructor(private usuarioService: UsuarioService, private router: Router,  private dialog: MatDialog,) {
     this.cadastroForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email,]),
@@ -40,7 +42,17 @@ export class LoginComponent implements OnInit {
           console.log('Usuário cadastrado com sucesso!', response);
           localStorage.setItem('userId', response.token);
           localStorage.setItem('token', response.token);
-          this.router.navigate(['/painel']);
+
+          const dialogRef = this.dialog.open(ConfirmDialog, {
+            width: '250px',
+            data: { message: "Usuario cadastrado! Ralize seu login" }
+          });
+          dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+              this.router.navigate(['/login']);
+            }
+          });
+          
         },
         error: (error) => {
           console.error('Erro ao cadastrar usuário', error);
@@ -63,6 +75,13 @@ export class LoginComponent implements OnInit {
             this.errorMessage = null;
             localStorage.setItem('userId', response.token);
             localStorage.setItem('token', response.token);
+            
+            const roles = response.roles;
+            if (roles.includes('ROLE_ADMIN')) {
+              localStorage.setItem('permission', 'ADMIN');
+            }else{
+              localStorage.setItem('permission', 'USER');
+            }
             this.router.navigate(['/painel']);
           }
           console.log('Login realizado com sucesso!', response);

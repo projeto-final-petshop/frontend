@@ -12,16 +12,42 @@ export class PainelComponent implements OnInit {
   activeItem: number = 0;
   appointments: any[] = [];
   selectedAppointmentId: number | null = null;
+  permissaoAdmin: any;
+  filteredAppointments: any;
+  isAdmin: boolean = false;
 
 
   constructor(private appointmentService: AppointmentService, private router: Router) { }
 
   ngOnInit(): void {
-    this.loadAppointments();
+    const permissao = localStorage.getItem('permission');
+    this.permissaoAdmin = permissao === 'ADMIN';
+    if(this.permissaoAdmin){
+      this.isAdmin = true
+      this.loadAdminAppointments();
+    }else{
+      this.isAdmin = false
+      this.loadAppointments();
+    }
+    
   }
 
+  loadAdminAppointments() {
+    this.appointmentService.getAdminAppointments().subscribe(
+      (data: any) => {
+        console.log(data)
+        this.appointments = data.content;
+      },
+      (error: any) => {
+        console.error('Erro ao carregar agendamentos', error);
+      }
+    );
+  }
+
+
+
   loadAppointments() {
-      this.appointments = [
+    this.appointments = [
       {
         petId: 10,
         userId: 10,
@@ -43,17 +69,34 @@ export class PainelComponent implements OnInit {
         appointmentId: 10
       }
     ];
+    this.filterAppointments()
 
     // this.appointmentService.getAppointments().subscribe(
     //   (data: any[]) => {
     //     console.log(data)
     //     this.appointments = data;
+    //     this.filterAppointments()
     //   },
     //   (error: any) => {
     //     console.error('Erro ao carregar agendamentos', error);
     //   }
     // );
   }
+  
+  filterAppointments(): void {
+    const allowedServices = ['BATH', 'BATH_AND_GROOMING', 'GROOMING'];
+    this.filteredAppointments = this.appointments.filter(appointment => 
+      allowedServices.includes(appointment.serviceType)
+    );
+  }
+
+  filterVeterinarianAppointments(): void {
+    this.filteredAppointments = this.appointments.filter(appointment => 
+      appointment.serviceType === 'VETERINARIAN'
+    );
+  }
+  
+
 
   logOut(){
     localStorage.removeItem('userId');

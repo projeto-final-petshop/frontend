@@ -15,12 +15,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
+  padding: 10px;  
   background-color: #f8f9fa;
   animation: slideInUp 0.5s ease-in-out;
 
   .nav-button {
-    background-color: #007bff;
+    background-color: #331e66;
     color: #ffffff;
     border: none;
     padding: 10px 20px;
@@ -54,7 +54,7 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
       .day-header {
-        background-color: #007bff;
+        background-color: #331e66;
         color: #ffffff;
         padding: 10px;
         text-align: center;
