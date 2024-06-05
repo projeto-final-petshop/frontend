@@ -1,135 +1,146 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700&display=swap");
+
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .scheduler-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #f8f9fa;
+  animation: slideInUp 0.5s ease-in-out;
+
+  .nav-button {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
     display: flex;
     align-items: center;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .scheduler {
+    display: flex;
+    flex: 1;
     justify-content: space-between;
-    padding: 10px;
-    background-color: #f8f9fa;
-  
-    .nav-button {
-      background-color: #007bff;
-      color: #ffffff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1em;
-      display: flex;
-      align-items: center;
-  
-      &:hover {
-        background-color: #0056b3;
-      }
-  
-      &:focus {
-        outline: none;
-      }
-    }
-  
-    .scheduler {
-      display: flex;
+    padding: 20px;
+
+    .day-column {
       flex: 1;
-      justify-content: space-between;
-      padding: 20px;
-  
-      .day-column {
-        flex: 1;
-        margin: 5px;
-        background-color: #ffffff;
-        border: 1px solid #e0e0e0;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  
-        .day-header {
-          background-color: #007bff;
-          color: #ffffff;
-          padding: 10px;
-          text-align: center;
-          font-weight: bold;
-          border-top-left-radius: 8px;
-          border-top-right-radius: 8px;
-          font-size: 1.1em;
-          height: 60px; /* Altura fixa para os cabeçalhos */
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-  
-        .appointments {
-          padding: 10px;
-          width: 150px;
-          height: 400px; /* Altura fixa para a área de agendamentos */
-          overflow-y: auto; /* Permite rolagem vertical */
-  
-          .appointment {
-          
-            background-color: #e1e1ff;
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
-  
-            &:hover {
-              transform: scale(1.02);
-            }
-  
-            .appointment-title {
-              font-weight: bold;
-              color: #007bff;
-            }
-  
-            .appointment-time,
-            .appointment-participants {
-              font-size: 0.9em;
-              color: #555;
-            }
-          }
-        }
-      }
-    }
-  }
-  
-  /* Media Queries for Responsiveness */
-  @media (max-width: 768px) {
-    .scheduler-container {
-      flex-direction: column;
-      align-items: flex-start;
-  
-      .nav-button {
-        margin-bottom: 10px;
-        width: 100%;
-        text-align: center;
-      }
-  
-      .scheduler {
-        flex-direction: column;
+      margin: 5px;
+      background-color: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+      .day-header {
+        background-color: #007bff;
+        color: #ffffff;
         padding: 10px;
-        
-        .day-column {
+        text-align: center;
+        font-weight: bold;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        font-size: 1.1em;
+        height: 60px; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .appointments {
+        padding: 10px;
+        width: 15vh;
+        height: 400px;
+        overflow-y: auto; 
+
+        .appointment {
+          background-color: #e1e1ff;
           margin: 10px 0;
-          width: 100%;
-  
-          .appointments {
-            height: 300px; /* Adjusted height for smaller screens */
+          padding: 10px;
+          border-radius: 5px;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+          transition: transform 0.2s;
+
+          &:hover {
+            transform: scale(1.02);
+          }
+
+          .appointment-title {
+            font-weight: bold;
+            color: #007bff;
+          }
+
+          .appointment-time,
+          .appointment-participants {
+            font-size: 0.9em;
+            color: #555;
           }
         }
       }
     }
   }
-  
-  @media (max-width: 480px) {
+}
+
+@media (max-width: 768px) {
+  .scheduler-container {
+    flex-direction: column;
+    align-items: flex-start;
+
     .nav-button {
-      font-size: 0.9em;
-      padding: 8px 16px;
+      margin-bottom: 10px;
+      width: 100%;
+      text-align: center;
     }
-  
-    .scheduler .day-column .day-header {
-      font-size: 1em;
-      height: 50px; /* Adjusted height for smaller screens */
-    }
-  
-    .scheduler .day-column .appointments {
-      height: 250px; /* Adjusted height for smaller screens */
+
+    .scheduler {
+      flex-direction: column;
+      padding: 10px;
+      
+      .day-column {
+        margin: 10px 0;
+        width: 100%;
+
+        .appointments {
+          height: 20vh;
+        }
+      }
     }
   }
-  
+}
+
+@media (max-width: 480px) {
+  .nav-button {
+    font-size: 0.9em;
+    padding: 8px 16px;
+  }
+
+  .scheduler .day-column .day-header {
+    font-size: 1em;
+    height: 50px;
+  }
+
+  .scheduler .day-column .appointments {
+    height: 250px;
+  }
+}
