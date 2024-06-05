@@ -47,40 +47,40 @@ export class PainelComponent implements OnInit {
 
 
   loadAppointments() {
-    this.appointments = [
-      {
-        petId: 10,
-        userId: 10,
-        serviceType: "BATH_AND_GROOMING",
-        petType: "DOG",
-        appointmentDate:  new Date(2024, 4, 29, 8, 0),
-        appointmentTime: "10:00",
-        status: "SCHEDULED",
-        appointmentId: 10
-      },
-      {
-        petId: 10,
-        userId: 10,
-        serviceType: "BATH_AND_GROOMING",
-        petType: "DOG",
-        appointmentDate:  new Date(2024, 4, 28, 8, 0),
-        appointmentTime: "10:00",
-        status: "SCHEDULED",
-        appointmentId: 10
-      }
-    ];
-    this.filterAppointments()
-
-    // this.appointmentService.getAppointments().subscribe(
-    //   (data: any[]) => {
-    //     console.log(data)
-    //     this.appointments = data;
-    //     this.filterAppointments()
+    // this.appointments = [
+    //   {
+    //     petId: 10,
+    //     userId: 10,
+    //     serviceType: "BATH_AND_GROOMING",
+    //     petType: "DOG",
+    //     appointmentDate:  new Date(2024, 4, 29, 8, 0),
+    //     appointmentTime: "10:00",
+    //     status: "SCHEDULED",
+    //     appointmentId: 10
     //   },
-    //   (error: any) => {
-    //     console.error('Erro ao carregar agendamentos', error);
+    //   {
+    //     petId: 10,
+    //     userId: 10,
+    //     serviceType: "BATH_AND_GROOMING",
+    //     petType: "DOG",
+    //     appointmentDate:  new Date(2024, 4, 28, 8, 0),
+    //     appointmentTime: "10:00",
+    //     status: "SCHEDULED",
+    //     appointmentId: 10
     //   }
-    // );
+    // ];
+    // this.filterAppointments()
+
+    this.appointmentService.getAppointments().subscribe(
+      (data: any[]) => {
+        console.log(data)
+        this.appointments = data;
+        this.filterAppointments()
+      },
+      (error: any) => {
+        console.error('Erro ao carregar agendamentos', error);
+      }
+    );
   }
   
   filterAppointments(): void {
