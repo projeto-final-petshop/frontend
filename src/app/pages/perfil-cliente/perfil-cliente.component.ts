@@ -90,7 +90,8 @@ export class PerfilClienteComponent implements OnInit {
 
   openDeleteConfirmDialog(): void {
     const dialogRef = this.dialog.open(ConfirmDialog, {
-      width: '250px'
+      width: '250px',
+      data: { message: "Você tem certeza que deseja excluir esta conta?" }
     });
 
     dialogRef.afterClosed().subscribe(result => {
