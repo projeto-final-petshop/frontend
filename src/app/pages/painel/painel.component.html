@@ -82,15 +82,28 @@
 
 
         <div *ngIf="activeItem === 3" >
-          <div style="text-align: center; margin-top: 50px;">
-            <h1>PetConnect</h1>
+          <div style="text-align: center; margin-top: 50px; margin-right: 5%;">
+            <h1 >PetConnect</h1>
             <h2>seu pet sempre bem cuidado.</h2>
-            <div style="text-align: center;">
-              <button style="margin-left: 40%; margin-top: 10%;" (click)="redirect('pets')" class="botao">Acessar perfil do meu pet</button>
-              <button style="margin-left: 42%; margin-top: 2%;" (click)="redirect('perfil-cliente')" class="botao">Acessar meu perfil</button>
+            <div class="responsive">
+              <div style=" display: flex;">
+              <button   (click)="redirect('pets')" class="botao">Acessar perfil do meu pet</button>
+              <button  (click)="redirect('perfil-cliente')" class="botao">Acessar meu perfil</button>
+              </div>
+              <div style="margin-top: 50%; margin-left: 35%;">
+              <app-dog ></app-dog>
+            </div>
             </div>
           </div>
           <div class="dog" style="text-align: center; margin-top: 13%;">
+            <div class="desktop">
+            <div style="margin-left: -130px !important; display: flex;">
+            <button style="margin-right: 15vh !important;"  (click)="redirect('pets')" class="botao">Acessar perfil do meu pet</button>
+            <button style="margin-right: 10vh !important;"  (click)="redirect('perfil-cliente')" class="botao">Acessar meu perfil</button>
+            </div>
+            
+           
+          </div>
             <app-dog></app-dog>
           </div>
         </div>

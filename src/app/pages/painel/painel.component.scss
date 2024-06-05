@@ -55,10 +55,17 @@ main {
   display: block;
 }
 
+.responsive{
+  display: none;
+}
+
 
 
 .dog {
   display: none;
+}
+.desktop{
+  display: block;
 }
 
 @media (min-width: 1200px) {
@@ -66,6 +73,16 @@ main {
     display: block;
   }
 }
+
+@media (max-width: 1200px) {
+  .responsive {
+    display: block;
+  }
+  .desktop{
+    display: none ;
+  }
+}
+
 
 
 
