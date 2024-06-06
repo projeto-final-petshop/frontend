@@ -15,7 +15,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { PerfilPetsComponent } from './pages/perfil-pets/perfil-pets.component';
 import { SchedulerComponent } from './components/scheduler/scheduler.component';
 import { PainelComponent } from './pages/painel/painel.component';
-import { registerLocaleData } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import localePtExtra from '@angular/common/locales/extra/pt';
 import { NewAppointmentComponent } from './components/new-appointment/new-appointment.component';
@@ -54,6 +54,7 @@ registerLocaleData(localePt, 'pt-BR', localePtExtra);
   ],
   providers: [
     UsuarioService,
+    DatePipe,
     CadastroPetsService,
     PetService,
     { provide: LOCALE_ID, useValue: 'pt-BR' },

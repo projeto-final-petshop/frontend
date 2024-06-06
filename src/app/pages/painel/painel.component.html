@@ -1,6 +1,6 @@
 <body>
   <main>
-    <nav class="main-menu">
+    <nav class="main-menu" >
       <div class="container">
         <div class="dog">
           <div class="dog-head">
@@ -71,7 +71,9 @@
 
 
         <div *ngIf="activeItem === 1" style="text-align: center; ">
-          <h1 style="width: 80%; margin-right: 10%; margin-top: 4%; " data-shadow='dang!'>Veterinário</h1>
+          <h1 style="width: 80%; margin-left: 3%; margin-top: 4%;" class="desktop" data-shadow='dang!'>Veterinário</h1>
+          <h1 style="width: 80%; margin-right: 10%; ; font-size: 3.5em;" class="responsive" data-shadow='dang!'>Veterinário</h1>
+          <br>
           <app-scheduler (editAppointmentEvent)="onEditAppointment($event)" [appointments]="filteredAppointments"></app-scheduler>
         </div>
 
