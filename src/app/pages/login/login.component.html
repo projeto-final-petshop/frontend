@@ -39,8 +39,8 @@
 
           <div *ngIf="isForgetPassword">
             <label *ngIf="isForgetPassword" style="padding-top: 40px !important;" for="chk" aria-hidden="true"> <p >Esqueci a senha</p></label>
-          <p style="padding: 30px;"> Digite seu CPF e enviaremos um email para que você possa redefinir sua senha </p>
-            <input type="text" formControlName="documentNumber" appCpfFormat placeholder="CPF">
+          <p style="padding: 30px;"> Digite seu email e enviaremos um email para que você possa redefinir sua senha </p>
+            <input type="text" formControlName="documentNumber" appCpfFormat placeholder="email">
             <div *ngIf="errorMessage">
               <p class="error-message">{{ errorMessage }}</p>
             </div>
