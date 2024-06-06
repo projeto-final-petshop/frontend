@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -10,7 +11,7 @@ export class SchedulerComponent implements OnInit {
   @Output() editAppointmentEvent = new EventEmitter<number>();
   currentWeekStart: Date = this.getStartOfWeek(new Date());
 
-  constructor() {}
+  constructor(private datePipe: DatePipe) {}
 
   ngOnInit() {
     this.currentWeekStart = this.getStartOfWeek(new Date());
@@ -58,9 +59,10 @@ export class SchedulerComponent implements OnInit {
   }
 
   getAppointmentsForDay(day: Date): any[] {
-    return this.appointments.filter(appointment =>
-      new Date(appointment.appointmentDate).toDateString() === day.toDateString()
-    );
+    return this.appointments.filter(appointment => {
+      const appointmentDate = new Date(appointment.appointmentDate);
+      return this.datePipe.transform(appointmentDate, 'yyyy-MM-dd') === this.datePipe.transform(day, 'yyyy-MM-dd');
+    });
   }
 
   previousWeek() {

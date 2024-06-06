@@ -117,6 +117,7 @@ export class PerfilClienteComponent implements OnInit {
   clearLocalStorage(): void {
     localStorage.removeItem('userId');
     localStorage.removeItem('token');
+    localStorage.removeItem('permission');
   }
 
   redirect(route : string){

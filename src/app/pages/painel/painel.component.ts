@@ -37,6 +37,7 @@ export class PainelComponent implements OnInit {
       (data: any) => {
         console.log(data)
         this.appointments = data.content;
+        this.filterAppointments()
       },
       (error: any) => {
         console.error('Erro ao carregar agendamentos', error);
@@ -101,6 +102,7 @@ export class PainelComponent implements OnInit {
   logOut(){
     localStorage.removeItem('userId');
     localStorage.removeItem('token');
+    localStorage.removeItem('permission');
     this.router.navigate(['/login']);
   }
 

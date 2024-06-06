@@ -48,7 +48,7 @@
     <div style="justify-content: center; padding: 20px;"  *ngIf="!userId">
       Você não está logado.  <a href="#" (click)="redirect('login'); $event.preventDefault()">clique aqui para realizar seu login.</a>
     </div>
-    <div style="justify-content: center; padding: 20px;"  *ngIf="pets.length === 0 && userId">
+    <div style="justify-content: center; padding: 20px;"  *ngIf="pets.length === 0 && !userId">
       Você ainda não cadastrou seu pet, <a href="#" (click)="redirect('cadastro-pet'); $event.preventDefault()">clique aqui para cadastrar agora.</a>
    
     </div>

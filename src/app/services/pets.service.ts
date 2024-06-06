@@ -33,6 +33,6 @@ export class PetService {
   }
 
   getAllPets(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/list-all`);
+    return this.http.get<any[]>(`${this.baseUrl}/pets`);
   }
 }
