@@ -32,6 +32,7 @@ export class PainelComponent implements OnInit {
     
   }
 
+
   loadAdminAppointments() {
     this.appointmentService.getAdminAppointments().subscribe(
       (data: any) => {
@@ -89,6 +90,7 @@ export class PainelComponent implements OnInit {
     this.filteredAppointments = this.appointments.filter(appointment => 
       allowedServices.includes(appointment.serviceType)
     );
+    console.log(this.filteredAppointments)
   }
 
   filterVeterinarianAppointments(): void {
@@ -107,7 +109,18 @@ export class PainelComponent implements OnInit {
   }
 
   setActive(index: number) {
+    const permissao = localStorage.getItem('permission');
+    this.permissaoAdmin = permissao === 'ADMIN';
+    if(this.permissaoAdmin){
+      this.isAdmin = true
+      this.loadAdminAppointments();
+    }else{
+      this.isAdmin = false
+      this.loadAppointments();
+    }
+
     this.activeItem = index;
+    
   }
 
   onEditAppointment(appointmentId: number) {
