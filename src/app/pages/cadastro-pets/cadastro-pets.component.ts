@@ -18,7 +18,7 @@ export class CadastroPetsComponent implements OnInit {
     this.cadastroPetsForm = new FormGroup({
       name: new FormControl(''),
       age: new FormControl('', [ Validators.min(0)]),
-      color: new FormControl('',),
+      // color: new FormControl('',),
       breed: new FormControl(''),
       animalType: new FormControl(''),
       birthdate: new FormControl(''),
