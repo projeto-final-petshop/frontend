@@ -31,8 +31,11 @@
         <form [formGroup]="loginForm" (ngSubmit)="login()">
         <div *ngIf="!isForgetPassword">
           <label  style="padding-top: 40px !important;" for="chk" aria-hidden="true"> <p >Login</p></label>
-          <input type="email" formControlName="email" placeholder="Usuário" required="true">
+          <input type="email" formControlName="email" placeholder="Email" required="true">
           <input type="password" formControlName="password" placeholder="Senha" required="">
+          <div *ngIf="errorMessage">
+            <p class="error-message">{{ errorMessage }}</p>
+          </div>
           <button type="submit">Login</button>
           <a  class="esqueciSenha" href="#" (click)="esqueciSenha(true); $event.preventDefault()">Esqueci minha senha</a>
         </div>
@@ -41,9 +44,7 @@
             <label *ngIf="isForgetPassword" style="padding-top: 40px !important;" for="chk" aria-hidden="true"> <p >Esqueci a senha</p></label>
           <p style="padding: 30px;"> Digite seu email e enviaremos um email para que você possa redefinir sua senha </p>
             <input type="text" formControlName="documentNumber" appCpfFormat placeholder="email">
-            <div *ngIf="errorMessage">
-              <p class="error-message">{{ errorMessage }}</p>
-            </div>
+           
             <a    class="esqueciSenha" href="#" (click)="esqueciSenha(false); $event.preventDefault()">Realizar login</a>
           </div>
         </form>

@@ -41,6 +41,7 @@ export class CadastroPetsComponent implements OnInit {
       this.cadastroPetsService.registerPet(formValues).subscribe({
         next: (response) => {
           console.log('Pet cadastrado com sucesso', response);
+          this.redirect('pets')
         },
         error: (error) => {
           console.error('Erro ao cadastrar pet', error);

@@ -40,8 +40,8 @@ export class LoginComponent implements OnInit {
           this.errorMessage = null;
           this.cadastroForm.reset();
           console.log('Usuário cadastrado com sucesso!', response);
-          localStorage.setItem('userId', response.token);
-          localStorage.setItem('token', response.token);
+          // localStorage.setItem('userId', response.token);
+          // localStorage.setItem('token', response.token);
 
           const dialogRef = this.dialog.open(ConfirmDialog, {
             width: '250px',
@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
           console.log('Login realizado com sucesso!', response);
         },
         error: (error) => {
-          console.error('Erro ao cadastrar usuário', error);
+          console.error('Erro ao realizar login', error);
           this.errorMessage = 'Erro ao realizar login. Por favor, tente novamente.'; 
         }
         
@@ -107,6 +107,7 @@ export class LoginComponent implements OnInit {
   }
 
   esqueciSenha(isForgetPassword: boolean) {
+    this.errorMessage = null;
     this.isForgetPassword = isForgetPassword;
   }
 

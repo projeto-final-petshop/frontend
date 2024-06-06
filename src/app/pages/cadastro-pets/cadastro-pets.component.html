@@ -6,6 +6,7 @@
         <form [formGroup]="cadastroPetsForm" (ngSubmit)="cadastrar()">
           <label for="chk" aria-hidden="true">Cadastre seu</label>
           <label style="margin-top: -20px !important;" for="chk" aria-hidden="true">PET</label>
+
           <div style="justify-content: center; padding: 20px; color: white"  *ngIf="!token">
             Você não está logado.  <a href="#" style="color: rgb(186, 0, 233);" (click)="redirect('login'); $event.preventDefault()">clique aqui para realizar seu login.</a>
           </div>
@@ -18,7 +19,7 @@
             <input type="date" formControlName="birthdate" placeholder="Data de Nascimento" required>
             
             <button type="submit" [disabled]="!cadastroPetsForm.valid">Realizar cadastro</button>
-           
+            <button mat-button class="pets arrow-left" (click)="redirect('painel')">Voltar ao painel</button>
             <br><br><br><br>
           </div>
      

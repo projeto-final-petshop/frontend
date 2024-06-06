@@ -23,7 +23,7 @@ export class PerfilPetsComponent implements OnInit {
     // this.loadUserDataAndPets(1)
     const storedUserId = localStorage.getItem('token');
 
-    this.pets = ['1', '2']
+    // this.pets = ['1', '2']
     if (storedUserId) {
       this.userId = storedUserId;
       this.loadUserDataAndPets(1);
@@ -82,11 +82,14 @@ export class PerfilPetsComponent implements OnInit {
     
     this.petService.getAllPets().subscribe({
       next: (data: any) => {
-        
-        this.pets = data.pets;
-        if (this.pets.length > 0) {
-          this.selectedPetIndex = 0;
-          this.populatePetDataForm(this.pets[this.selectedPetIndex]);
+        console.log(data)
+        this.pets = data || [];
+        console.log(this.pets)
+        if(this.pets){
+          if (this.pets.length > 0) {
+            this.selectedPetIndex = 0;
+            this.populatePetDataForm(this.pets[this.selectedPetIndex]);
+          }
         }
       },
       error: (error: any) => {

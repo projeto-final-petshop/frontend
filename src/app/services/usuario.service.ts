@@ -22,10 +22,7 @@ export class UsuarioService {
   }
 
   loginUser(userData: any): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-    return this.http.post(this.loginUrl, userData, { headers }).pipe(
+    return this.http.post(this.loginUrl, userData).pipe(
       tap((response: any) => {
         localStorage.setItem('token', response.token);
       })

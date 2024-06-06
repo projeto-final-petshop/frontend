@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class PetService {
 
-  private baseUrl = 'http://localhost:8888/api/v1/pets'; // URL base da API
+  private baseUrl = 'http://localhost:8888/api/v1/pets'; 
 
   constructor(private http: HttpClient) { }
 
@@ -33,6 +33,6 @@ export class PetService {
   }
 
   getAllPets(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/pets`);
+    return this.http.get<any[]>(`${this.baseUrl}`);
   }
 }
