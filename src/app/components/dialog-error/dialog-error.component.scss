@@ -1,0 +1,377 @@
+button{
+    width: 60%;
+    height: 40px;
+    margin: 10px auto;
+    justify-content: center;
+    display: block;
+    color: #fff;
+    background: #df604f;
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: 20px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    transition: .2s ease-in;
+    cursor: pointer;
+  }
+  button:hover{
+    background: #c71b04;
+  }
+
+
+
+  $color-tint: 10 !default;
+$color-tint-grey: 6.66 !default;
+
+$color-tint-darker: $color-tint * 2 !default;
+$color-tint-dark: $color-tint !default;
+$color-tint-light: $color-tint !default;
+$color-tint-lighter: $color-tint * 2 !default;
+$color-tint-lightest: $color-tint * 3 !default;
+
+$color-tint-grey-darker: $color-tint-grey * 4 !default;
+$color-tint-grey-dark: $color-tint-grey * 2 !default;
+$color-tint-grey-light: $color-tint-grey !default;
+$color-tint-grey-lighter: $color-tint-grey * 2 !default;
+$color-tint-grey-lightest: $color-tint-grey * 3 !default;
+
+$color-black: #000 !default;
+$color-grey: lighten($color-black, $color-tint-grey * 10) !default; //#aaa
+$color-white: #fff !default;
+$color-beige: #f2f2ea !default;
+$color-red: #cc4e3d !default;
+$color-pink: #e55ccf !default;
+$color-purple: #a73abf !default;
+$color-blue: #3674b2 !default;
+$color-green: #36b274 !default;
+$color-cyan: #36b2b2 !default;
+$color-yellow: #e5ab45 !default;
+$color-orange: #d97c42 !default;
+$color-brown: #b26336 !default;
+$color-chartreuse: #c6d601 !default;
+
+$color-background: #eee !default;
+$color-brand: #7994af !default;
+$color-info: $color-blue !default;
+$color-warning: $color-yellow !default;
+$color-success: $color-green !default;
+$color-error: $color-red !default;
+
+$color-warning-light: lighten($color-warning, $color-tint-light) !default;
+$color-info-light: lighten($color-info, $color-tint-light) !default;
+//$color-success-light: lighten($color-success, $color-tint-light) !default;
+$color-error-light: lighten($color-error, $color-tint-light) !default;
+$color-success-light: rgba($color-success, .4) !default;
+
+
+
+$icon-size: .5;
+$size: 1em;
+
+body {
+  background-color: $color-background;
+//background-color: #cde;
+}
+
+html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+*, *::before, *::after, *:before, *:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+.font-normal {
+  font-size: 80px;
+}
+
+.c-flash_icon {
+  width: 1em;
+  height: 1em;
+  border: .1em solid transparent;
+  border-radius: 50%;
+  margin: .5em auto;
+  padding: 0;
+  position: relative;
+  cursor: default;
+  user-select: none;
+
+  &.c-flash_icon--warning,
+  &.c-flash_icon--question,
+  &.c-flash_icon--info {
+//    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    text-align: center;
+    .letter {
+      font-size: .75em;
+      line-height: 1.1em;
+    }
+  }
+
+  &.c-flash_icon--warning {
+    color: $color-warning;
+    border-color: $color-warning-light;
+  }
+
+  &.c-flash_icon--info {
+//    font-family: 'Open Sans', sans-serif;
+    color: $color-info;
+    border-color: $color-info-light;
+  }
+
+  &.c-flash_icon--question {
+    color: $color-info;
+    border-color: $color-info-light;
+  }
+
+  &.c-flash_icon--error {
+    border-color: $color-error-light;
+
+    .x-mark {
+      position: absolute;
+      font-size: $icon-size*$size;
+      height: 1em;
+      width: 1em;
+      top: 0.47em;;
+      left: 0.47em;
+    }
+
+    .line {
+      position: absolute;
+      height: .1*$size/$icon-size;
+      width: 1.2em;//calc(sqrt($error-size*$error-size*$size/2));
+      background-color: $color-error;
+      display: block;
+      top: (.5-.05/$icon-size)*$size;
+      border-radius: .025em;
+
+      &.left {
+        transform: rotate(45deg);
+        left: -.1em;
+      }
+
+      &.right {
+        transform: rotate(-45deg);
+        right: -.1em;
+      }
+    }
+    &.animate {
+      animation: animate-error-icon 0.5s;
+      .x-mark {
+        animation: animate-x-mark 0.5s;
+      }
+    }
+  }
+
+  &.c-flash_icon--success {
+    border-color: $color-success;
+
+    &::before,
+    &::after { // Emulate moving circular line
+      content: '';
+      border-radius: 50%;
+      position: absolute;
+      width: .7em;
+      height: 1em;
+      background: $color-background;
+      transform: rotate(45deg);
+    }
+
+    &::before {
+      border-radius: 1em 0 0 1em;
+      width: .5em;
+      top: .2125em;
+      left: -.15em;
+      transform: rotate(-45deg);
+//      transform-origin: .75em .75em;
+//background: #dac;
+    }
+
+    &::after {
+      border-radius: 0 1em 1em 0;
+      top: .04em;
+      left: .265em;
+      transform: rotate(-45deg);
+      transform-origin: 0 .5em;
+//background: #000;
+    }
+
+    .placeholder { // Ring
+      width: 1em;
+      height: 1em;
+      border: .1em solid $color-success-light;
+      border-radius: 50%;
+      position: absolute;
+      left: -.1em;
+      top: -.1em;
+      z-index: 2;
+    }
+    .fix { // Hide corners left from animation
+      width: .1em;
+      height: 1em;
+      background-color: $color-background;
+      position: absolute;
+      left: .175em;
+      top: .05em;
+      z-index: 1;
+      transform: rotate(-45deg);
+    }
+
+    .line {
+      height: .1em;
+      background-color: $color-success;
+      display: block;
+      border-radius: .025em;
+      position: absolute;
+      z-index: 2;
+
+      &.tip {
+        width: .3125em;
+        left: .05em;
+        top: .475em;
+        transform: rotate(45deg);
+      background-color: $color-success;
+      }
+
+      &.long {
+        width: .5875em;
+        right: .05em;
+        top: .375em;
+        transform: rotate(-45deg);
+      }
+    }
+    &.animate {
+      &::after {
+        animation: rotatePlaceholder 4.25s ease-in;
+      }
+      .tip {
+        animation: animate-success-tip 1s;
+      }
+      .long {
+        animation: animate-success-long 1s;
+      }
+    }
+  }
+}
+
+
+
+// Success icon animation
+
+@keyframes animate-success-tip {
+  0% {
+    width: 0;
+    left: .0125em;
+    top: .1375em;
+  }
+
+  54% {
+    width: 0;
+    left: .0125em;
+    top: .1375em;
+  }
+
+  70% {
+    width: .475em;
+    left: -.1em;
+    top: .4em;
+  }
+
+  84% {
+    width: .2375em;
+    left: .12em;
+    top: .5em;
+  }
+
+  100% {
+    width: .3125em;
+    left: .05em;
+    top: .475em;
+  }
+}
+
+@keyframes animate-success-long {
+  0% {
+    width: 0;
+    right: .55em;
+    top: .575em;
+  }
+
+  65% {
+    width: 0;
+    right: .55em;
+    top: .575em;
+  }
+
+  84% {
+    width: .65em;
+    right: 0;
+    top: .35em;
+  }
+
+  100% {
+    width: .5875em;
+    right: .05em;
+    top: .375em;
+  }
+}
+
+@keyframes rotatePlaceholder {
+  0% {
+    transform: rotate(-45deg);
+  }
+
+  5% {
+    transform: rotate(-45deg);
+  }
+
+  12% {
+    transform: rotate(-405deg);
+  }
+
+  100% {
+    transform: rotate(-405deg);
+  }
+}
+
+// Error icon animation
+
+@keyframes animate-error-icon {
+  0% {
+    transform: rotateX(100deg);
+    opacity: 0;
+  }
+
+  100% {
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes animate-x-mark {
+  0% {
+    transform: scale(.4);
+    margin-top: .325em;
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(.4);
+    margin-top: .325em;
+    opacity: 0;
+  }
+
+  80% {
+    transform: scale(1.15);
+    margin-top: -.075em;
+  }
+
+  100% {
+    transform: scale(1);
+    margin-top: 0;
+    opacity: 1;
+  }
+}

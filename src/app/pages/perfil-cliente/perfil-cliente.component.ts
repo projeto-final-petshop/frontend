@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { DialogErrorComponent } from 'src/app/components/dialog-error/dialog-error.component';
 import { ConfirmDialog } from 'src/app/components/dialog/dialog.component';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { isHttpFailureResponse } from 'src/app/utils/error.validator';
 
 
 @Component({
@@ -61,6 +63,19 @@ export class PerfilClienteComponent implements OnInit {
       },
       error: (error) => {
         console.error('Erro ao carregar os dados do usuário', error);
+        let requestErrorMessage = error.message;
+        if (isHttpFailureResponse(error)) {
+          requestErrorMessage = "Serviço fora do ar. Nossa equipe está trabalhando para voltar o quanto antes."
+        }
+        const dialogRef = this.dialog.open(DialogErrorComponent, {
+          width: '250px',
+          data: { message: requestErrorMessage }
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+            this.router.navigate(['/login']);
+          }
+        });
       }
     });
   }
@@ -73,6 +88,20 @@ export class PerfilClienteComponent implements OnInit {
         },
         error: (error) => {
           console.error('Erro ao atualizar usuário', error);
+
+          let requestErrorMessage = error.message;
+          if (isHttpFailureResponse(error)) {
+            requestErrorMessage = "Serviço fora do ar. Nossa equipe está trabalhando para voltar o quanto antes."
+          }
+          const dialogRef = this.dialog.open(DialogErrorComponent, {
+            width: '250px',
+            data: { message: requestErrorMessage }
+          });
+          dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+              // this.router.navigate(['/login']);
+            }
+          });
         }
       });
     } else {
@@ -110,6 +139,21 @@ export class PerfilClienteComponent implements OnInit {
       },
       error: (error) => {
         console.error('Erro ao excluir o usuário', error);
+
+
+        let requestErrorMessage = error.message;
+        if (isHttpFailureResponse(error)) {
+          requestErrorMessage = "Serviço fora do ar. Nossa equipe está trabalhando para voltar o quanto antes."
+        }
+        const dialogRef = this.dialog.open(DialogErrorComponent, {
+          width: '250px',
+          data: { message: requestErrorMessage }
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+            this.router.navigate(['/login']);
+          }
+        });
       }
     });
   }

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { DialogErrorComponent } from 'src/app/components/dialog-error/dialog-error.component';
 import { CadastroPetsService } from 'src/app/services/cadastro-pets.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { isHttpFailureResponse } from 'src/app/utils/error.validator';
 
 @Component({
   selector: 'app-cadastro-pets',
@@ -14,7 +17,7 @@ export class CadastroPetsComponent implements OnInit {
   cadastroPetsForm: FormGroup;
   token: any;
 
-  constructor(private cadastroPetsService: CadastroPetsService, private router: Router) {
+  constructor(private cadastroPetsService: CadastroPetsService, private router: Router,  private dialog: MatDialog) {
     this.cadastroPetsForm = new FormGroup({
       name: new FormControl(''),
       age: new FormControl('', [ Validators.min(0)]),
@@ -45,10 +48,26 @@ export class CadastroPetsComponent implements OnInit {
         },
         error: (error) => {
           console.error('Erro ao cadastrar pet', error);
+
+          
+          let requestErrorMessage = error.message;
+          if (isHttpFailureResponse(error)) {
+            requestErrorMessage = "Serviço fora do ar. Nossa equipe está trabalhando para voltar o quanto antes."
+          }
+          const dialogRef = this.dialog.open(DialogErrorComponent, {
+            width: '250px',
+            data: { message: requestErrorMessage }
+          });
+          dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+              // this.router.navigate(['/login']);
+            }
+          });
         }
       });
     } else {
       console.error('Formulário inválido');
+      
     }
   }
   

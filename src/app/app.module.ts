@@ -24,6 +24,7 @@ import { AuthInterceptor } from './interceptors/auth-interceptor.service';
 import { UsuarioService } from './services/usuario.service';
 import { CadastroPetsService } from './services/cadastro-pets.service';
 import { PetService } from './services/pets.service';
+import { DialogErrorComponent } from './components/dialog-error/dialog-error.component';
 
 
 registerLocaleData(localePt, 'pt-BR', localePtExtra); 
@@ -40,6 +41,7 @@ registerLocaleData(localePt, 'pt-BR', localePtExtra);
     PainelComponent,
     NewAppointmentComponent,
     DogComponent,
+    DialogErrorComponent,
     
   ],
   imports: [

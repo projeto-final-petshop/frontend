@@ -4,6 +4,8 @@ import { UsuarioService } from '../../services/usuario.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialog } from 'src/app/components/dialog/dialog.component';
+import { DialogErrorComponent } from 'src/app/components/dialog-error/dialog-error.component';
+import { isHttpFailureResponse } from 'src/app/utils/error.validator';
 
 @Component({
   selector: 'app-login',
@@ -55,8 +57,23 @@ export class LoginComponent implements OnInit {
           
         },
         error: (error) => {
+          console.log(error)
           console.error('Erro ao cadastrar usuário', error);
           this.errorMessage = 'Erro ao cadastrar usuário. Por favor, tente novamente.';
+
+          let requestErrorMessage = error.message;
+          if (isHttpFailureResponse(error)) {
+            requestErrorMessage = "Serviço fora do ar. Nossa equipe está trabalhando para voltar o quanto antes."
+          }
+          const dialogRef = this.dialog.open(DialogErrorComponent, {
+            width: '250px',
+            data: { message: requestErrorMessage }
+          });
+          dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+              this.router.navigate(['/login']);
+            }
+          });
         }
       });
     }
@@ -89,6 +106,21 @@ export class LoginComponent implements OnInit {
         error: (error) => {
           console.error('Erro ao realizar login', error);
           this.errorMessage = 'Erro ao realizar login. Por favor, tente novamente.'; 
+          let requestErrorMessage = error.message;
+
+          if (isHttpFailureResponse(error)) {
+            requestErrorMessage = "Serviço fora do ar. Nossa equipe está trabalhando para voltar o quanto antes."
+          }
+          const dialogRef = this.dialog.open(DialogErrorComponent, {
+            width: '250px',
+            data: { message: requestErrorMessage }
+          });
+          dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+              this.router.navigate(['/login']);
+            }
+          });
+          
         }
         
       });

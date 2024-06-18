@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { DialogErrorComponent } from 'src/app/components/dialog-error/dialog-error.component';
 import { ConfirmDialog } from 'src/app/components/dialog/dialog.component';
 import { PetService } from 'src/app/services/pets.service';
+import { isHttpFailureResponse } from 'src/app/utils/error.validator';
 
 @Component({
   selector: 'app-perfil-pet',
@@ -94,6 +96,21 @@ export class PerfilPetsComponent implements OnInit {
       },
       error: (error: any) => {
         console.error('Erro ao carregar os dados do usuário e pets', error);
+        
+        let requestErrorMessage = error.message;
+        if (isHttpFailureResponse(error)) {
+          requestErrorMessage = "Serviço fora do ar. Nossa equipe está trabalhando para voltar o quanto antes."
+        }
+        const dialogRef = this.dialog.open(DialogErrorComponent, {
+          width: '250px',
+          data: { message: requestErrorMessage }
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+            // this.router.navigate(['/login']);
+          }
+        });
+
       }
     });
   }
@@ -120,6 +137,21 @@ export class PerfilPetsComponent implements OnInit {
         },
         error: (error: any) => {
           console.error('Erro ao atualizar pet', error);
+
+          let requestErrorMessage = error.message;
+          if (isHttpFailureResponse(error)) {
+            requestErrorMessage = "Serviço fora do ar. Nossa equipe está trabalhando para voltar o quanto antes."
+          }
+          const dialogRef = this.dialog.open(DialogErrorComponent, {
+            width: '250px',
+            data: { message: requestErrorMessage }
+          });
+          dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+              // this.router.navigate(['/login']);
+            }
+          });
+
         }
       });
     } else {
@@ -153,6 +185,19 @@ export class PerfilPetsComponent implements OnInit {
       },
       error: (error: any) => {
         console.error('Erro ao excluir o pet', error);
+        let requestErrorMessage = error.message;
+        if (isHttpFailureResponse(error)) {
+          requestErrorMessage = "Serviço fora do ar. Nossa equipe está trabalhando para voltar o quanto antes."
+        }
+        const dialogRef = this.dialog.open(DialogErrorComponent, {
+          width: '250px',
+          data: { message: requestErrorMessage }
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+            // this.router.navigate(['/login']);
+          }
+        });
       }
     });
   }

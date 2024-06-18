@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { DialogErrorComponent } from 'src/app/components/dialog-error/dialog-error.component';
 import { AppointmentService } from 'src/app/services/appointment.service';
+import { isHttpFailureResponse } from 'src/app/utils/error.validator';
 
 
 @Component({
@@ -17,7 +20,7 @@ export class PainelComponent implements OnInit {
   isAdmin: boolean = false;
 
 
-  constructor(private appointmentService: AppointmentService, private router: Router) { }
+  constructor(private appointmentService: AppointmentService, private router: Router  ,private dialog: MatDialog) { }
 
   ngOnInit(): void {
     const permissao = localStorage.getItem('permission');
@@ -42,6 +45,20 @@ export class PainelComponent implements OnInit {
       },
       (error: any) => {
         console.error('Erro ao carregar agendamentos', error);
+
+        let requestErrorMessage = error.message;
+        if (isHttpFailureResponse(error)) {
+          requestErrorMessage = "Serviço fora do ar. Nossa equipe está trabalhando para voltar o quanto antes."
+        }
+        const dialogRef = this.dialog.open(DialogErrorComponent, {
+          width: '250px',
+          data: { message: requestErrorMessage }
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+            // this.router.navigate(['/login']);
+          }
+        });
       }
     );
   }
@@ -81,6 +98,20 @@ export class PainelComponent implements OnInit {
       },
       (error: any) => {
         console.error('Erro ao carregar agendamentos', error);
+
+        let requestErrorMessage = error.message;
+        if (isHttpFailureResponse(error)) {
+          requestErrorMessage = "Serviço fora do ar. Nossa equipe está trabalhando para voltar o quanto antes."
+        }
+        const dialogRef = this.dialog.open(DialogErrorComponent, {
+          width: '250px',
+          data: { message: requestErrorMessage }
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+            // this.router.navigate(['/login']);
+          }
+        });
       }
     );
   }
