@@ -2,8 +2,8 @@
   <button class="nav-button" (click)="previousWeek()">
     &#8592; Semana Anterior
   </button>
-  <div class="scheduler">
-    <div class="day-column" *ngFor="let day of getDaysOfWeek()">
+  <div *ngIf="appointments"  class="scheduler">
+    <div  class="day-column" *ngFor="let day of getDaysOfWeek()">
       <div class="day-header">{{ day | date: 'EEEE, d MMMM' : 'pt-BR' }}</div>
       <div class="appointments">
         <div *ngFor="let appointment of getAppointmentsForDay(day)" class="appointment">

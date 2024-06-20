@@ -12,10 +12,19 @@
           </div>
           <div *ngIf="token">
             <input type="text" formControlName="name" placeholder="Nome do Pet" required>
-            <input type="number" formControlName="age" placeholder="Idade do Pet" required>
+            <input type="text" formControlName="color" placeholder="Cor do Pet" required>
             <!-- <input type="text" formControlName="color" placeholder="Cor do Pet" required> -->
             <input type="text" formControlName="breed" placeholder="Raça do Pet (Opcional)">
-            <input type="text" formControlName="animalType" placeholder="Tipo de Animal" required>
+            <!-- <input type="text" formControlName="animalType" placeholder="Tipo de Animal" required> -->
+            <div class="form-group" style="margin-top: -20px;">,
+                <select style="width: 66% !important;" id="petType" formControlName="animalType">
+                  <option value="">Tipo de animal</option>
+                  <option value="DOG">Cachorro</option>
+                  <option value="CAT">Gato</option>
+                  <option value="OTHER">Outro</option>
+                </select>
+            </div>
+        
             <input type="date" formControlName="birthdate" placeholder="Data de Nascimento" required>
             
             <button type="submit" [disabled]="!cadastroPetsForm.valid">Realizar cadastro</button>
