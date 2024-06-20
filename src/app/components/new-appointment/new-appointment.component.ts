@@ -23,7 +23,6 @@ export class NewAppointmentComponent implements OnInit, OnChanges {
     this.appointmentForm = this.fb.group({
       petId: ['', Validators.required],
       serviceType: ['', Validators.required],
-      petType: ['', Validators.required],
       appointmentDate: ['', Validators.required],
       appointmentTime: ['', Validators.required]
     });
@@ -49,6 +48,21 @@ export class NewAppointmentComponent implements OnInit, OnChanges {
   }
 
   loadPets(): void {
+    // this.pets = [
+    //   {
+    //     "id": 3,
+    //     "name": "nome teste",
+    //     "age": 0,
+    //     "color": "color teste",
+    //     "breed": "breed teste",
+    //     "animalType": "animal type teste",
+    //     "birthdate": "2024-06-19",
+    //     "createdAt": "2024-06-19T12:53:48.354Z",
+    //     "updatedAt": "2024-06-19T12:53:48.354Z",
+    //     "userId": 0
+    //   }
+    // ]
+    
     this.petService.getAllPets().subscribe(
       (pets: any[]) => {
         this.pets = pets;
