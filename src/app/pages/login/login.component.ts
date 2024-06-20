@@ -18,11 +18,12 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isForgetPassword!: boolean;
   errorMessage: string | null = null;
+  forgetPasswordForm: FormGroup;
 
-  constructor(private usuarioService: UsuarioService, private router: Router,  private dialog: MatDialog,) {
+  constructor(private usuarioService: UsuarioService, private router: Router, private dialog: MatDialog) {
     this.cadastroForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email,]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, this.passwordStrengthValidator()]),
       cpf: new FormControl('', [Validators.required]),
       phoneNumber: new FormControl('', [Validators.required])
@@ -30,6 +31,9 @@ export class LoginComponent implements OnInit {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required])
+    });
+    this.forgetPasswordForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email])
     });
   }
 
@@ -42,8 +46,6 @@ export class LoginComponent implements OnInit {
           this.errorMessage = null;
           this.cadastroForm.reset();
           console.log('Usuário cadastrado com sucesso!', response);
-          // localStorage.setItem('userId', response.token);
-          // localStorage.setItem('token', response.token);
 
           const dialogRef = this.dialog.open(ConfirmDialog, {
             width: '250px',
@@ -57,13 +59,13 @@ export class LoginComponent implements OnInit {
           
         },
         error: (error) => {
-          console.log(error)
+          console.log(error);
           console.error('Erro ao cadastrar usuário', error);
           this.errorMessage = 'Erro ao cadastrar usuário. Por favor, tente novamente.';
 
           let requestErrorMessage = error.message;
           if (isHttpFailureResponse(error)) {
-            requestErrorMessage = "Serviço fora do ar. Nossa equipe está trabalhando para voltar o quanto antes."
+            requestErrorMessage = "Serviço fora do ar. Nossa equipe está trabalhando para voltar o quanto antes.";
           }
           const dialogRef = this.dialog.open(DialogErrorComponent, {
             width: '250px',
@@ -96,7 +98,7 @@ export class LoginComponent implements OnInit {
             const roles = response.roles;
             if (roles.includes('ROLE_ADMIN')) {
               localStorage.setItem('permission', 'ADMIN');
-            }else{
+            } else {
               localStorage.setItem('permission', 'USER');
             }
             this.router.navigate(['/painel']);
@@ -105,11 +107,11 @@ export class LoginComponent implements OnInit {
         },
         error: (error) => {
           console.error('Erro ao realizar login', error);
-          this.errorMessage = 'Erro ao realizar login. Por favor, tente novamente.'; 
+          this.errorMessage = 'Erro ao realizar login. Por favor, tente novamente.';
           let requestErrorMessage = error.message;
 
           if (isHttpFailureResponse(error)) {
-            requestErrorMessage = "Serviço fora do ar. Nossa equipe está trabalhando para voltar o quanto antes."
+            requestErrorMessage = "Serviço fora do ar. Nossa equipe está trabalhando para voltar o quanto antes.";
           }
           const dialogRef = this.dialog.open(DialogErrorComponent, {
             width: '250px',
@@ -122,7 +124,6 @@ export class LoginComponent implements OnInit {
           });
           
         }
-        
       });
     }
   }
@@ -158,5 +159,40 @@ export class LoginComponent implements OnInit {
         passwordStrength: 'Password must be at least 8 characters long, include at least one uppercase letter, one number, and one special character.'
       };
     };
+  }
+
+  recuperarSenha() {
+    if (this.forgetPasswordForm.valid) {
+      const email = this.forgetPasswordForm.value.email;
+      this.usuarioService.resetPassword({ email }).subscribe({
+        next: (response) => {
+          const dialogRef = this.dialog.open(ConfirmDialog, {
+            width: '250px',
+            data: { message: 'Um e-mail de recuperação de senha foi enviado. Por favor, verifique seu e-mail.' }
+          });
+          dialogRef.afterClosed().subscribe(() => {
+            this.router.navigate(['/login']);
+          });
+        },
+        error: (error) => {
+          console.error('Erro ao enviar e-mail de recuperação de senha', error);
+          this.errorMessage = 'Erro ao enviar e-mail de recuperação de senha. Por favor, tente novamente.';
+          let requestErrorMessage = error.message;
+
+          if (isHttpFailureResponse(error)) {
+            requestErrorMessage = "Serviço fora do ar. Nossa equipe está trabalhando para voltar o quanto antes.";
+          }
+          const dialogRef = this.dialog.open(DialogErrorComponent, {
+            width: '250px',
+            data: { message: requestErrorMessage }
+          });
+          dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+              this.router.navigate(['/login']);
+            }
+          });
+        }
+      });
+    }
   }
 }
