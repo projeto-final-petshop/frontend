@@ -19,7 +19,6 @@ export class ResetPasswordComponent implements OnInit {
   
   constructor(private usuarioService: UsuarioService, private router: Router, private dialog: MatDialog, private route: ActivatedRoute) {
     this.cadastroForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, this.passwordStrengthValidator()]),
       confirmPassword: new FormControl('', [Validators.required])
     }, { validators: this.passwordMatchValidator });
