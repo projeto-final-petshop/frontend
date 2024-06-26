@@ -61,10 +61,14 @@ export class UsuarioService {
     return this.http.post(this.resetPasswordUrl, emailData, { headers });
   }
 
-  confirmResetPassword(token: string, passwordData: any): Observable<any> {
+  confirmResetPassword(token: string, newPassword: string, confirmPassword: string): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    return this.http.post(`${this.confirmResetPasswordUrl}?token=${token}`, passwordData, { headers });
+
+    const body = { newPassword, confirmPassword };
+    const url = `${this.confirmResetPasswordUrl}?token=${token}`;
+
+    return this.http.post(url, body, { headers });
   }
 }

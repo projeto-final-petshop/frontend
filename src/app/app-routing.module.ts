@@ -6,6 +6,7 @@ import { CpfFormatDirective } from './directives/cpf-format.directive';
 import { PerfilClienteComponent } from './pages/perfil-cliente/perfil-cliente.component';
 import { PerfilPetsComponent } from './pages/perfil-pets/perfil-pets.component';
 import { PainelComponent } from './pages/painel/painel.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path: 'perfil-cliente', component: PerfilClienteComponent},
   {path: 'pets', component: PerfilPetsComponent},
   {path: 'painel', component: PainelComponent},
+  {path: 'reset-password', component: ResetPasswordComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 

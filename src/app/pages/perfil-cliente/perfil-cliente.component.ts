@@ -85,6 +85,14 @@ export class PerfilClienteComponent implements OnInit {
       this.usuarioService.updateUser(this.userId, this.userDataForm.getRawValue()).subscribe({
         next: (response) => {
           console.log('Usuário atualizado com sucesso', response);
+          const dialogRef = this.dialog.open(ConfirmDialog, {
+            width: '250px',
+            data: { message: 'Usuário atualizado com sucesso!' }
+          });
+          dialogRef.afterClosed().subscribe(() => {
+            this.clearLocalStorage();
+            this.router.navigate(['/login']);
+          });
         },
         error: (error) => {
           console.error('Erro ao atualizar usuário', error);
@@ -134,8 +142,16 @@ export class PerfilClienteComponent implements OnInit {
     this.usuarioService.deleteUser(this.userId).subscribe({
       next: () => {
         console.log('Usuário excluído com sucesso.');
-        this.clearLocalStorage();
-        this.router.navigate(['/login']);
+        const dialogRef = this.dialog.open(ConfirmDialog, {
+          width: '250px',
+          data: { message: 'Usuário deletado com sucesso!' }
+        });
+        dialogRef.afterClosed().subscribe(() => {
+          this.clearLocalStorage();
+          this.router.navigate(['/login']);
+        });
+  
+       
       },
       error: (error) => {
         console.error('Erro ao excluir o usuário', error);

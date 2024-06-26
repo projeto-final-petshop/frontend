@@ -2,30 +2,38 @@
   <div class="main">
     <input type="checkbox" id="chk" aria-hidden="true">
 
-      <div class="signup">
-        <form [formGroup]="cadastroForm" (ngSubmit)="cadastrar()">
-          <label for="chk"  (click)="esqueciSenha(false)" aria-hidden="true">Cadastro</label>
-          <input type="text" formControlName="name" placeholder="Nome" required>
-          <input type="email" formControlName="email" placeholder="Email" required>
-          <div *ngIf="cadastroForm.get('email')?.touched || cadastroForm.get('email')?.dirty">
-            <div *ngIf="cadastroForm.get('email')?.errors?.['email']">
-              <p class="error-message">
-                Por favor, insira um endereço de e-mail válido.</p>
-            </div>
+    <div class="signup">
+      <form [formGroup]="cadastroForm" (ngSubmit)="cadastrar()">
+        <label for="chk" (click)="esqueciSenha(false)" aria-hidden="true">Cadastro</label>
+        <input style="margin-top: -10px;" type="text" formControlName="name" placeholder="Nome" required>
+        <input type="email" formControlName="email" placeholder="Email" required>
+        <div *ngIf="cadastroForm.get('email')?.touched || cadastroForm.get('email')?.dirty">
+          <div *ngIf="cadastroForm.get('email')?.errors?.['email']">
+            <p class="error-message">Por favor, insira um endereço de e-mail válido.</p>
           </div>
-          <input type="text" formControlName="cpf" appCpfFormat placeholder="CPF">
-          <input type="tel" formControlName="phoneNumber" placeholder="Número de Telefone" required>
-          <input type="password" formControlName="password" placeholder="Senha" required>
-        <div style="padding-top: 10px !important; padding-bottom: 10px;">
-          <p  *ngIf="cadastroForm.get('password')?.value?.length > 0 && cadastroForm.get('password')?.errors?.['passwordStrength']" class="error-message">
-            Para sua segurança, sua senha deve conter letras maiúsculas, minúsculas, números e caracteres especiais.</p>
         </div>
+        <input type="text" formControlName="cpf" appCpfFormat placeholder="CPF">
+        <input type="tel" formControlName="phoneNumber" placeholder="Número de Telefone" required>
+        <input type="password" formControlName="password" placeholder="Senha" required>
+        <input type="password" formControlName="confirmPassword" placeholder="Confirme a Senha" required>
+    
+        <div *ngIf="showPasswordMismatchError() && !showPasswordStrengthError()" class="error-message">
+          As senhas não coincidem.
+        </div>
+        <div *ngIf="showPasswordStrengthError()" style="padding-top: 10px !important; padding-bottom: 10px;">
+          <p class="error-message">
+            Para sua segurança, sua senha deve conter letras maiúsculas, minúsculas, números e caracteres especiais.
+          </p>
+        </div>
+    
         <div *ngIf="errorMessage">
           <p class="error-message">{{ errorMessage }}</p>
         </div>
-          <button style="margin-bottom: 10px !important;" [disabled]="!cadastroForm.valid" type="submit">Realizar cadastro</button>
-        </form>
-      </div>
+        <button style="margin-bottom: 10px !important;" [disabled]="!cadastroForm.valid" type="submit">Realizar cadastro</button>
+      </form>
+    </div>
+    
+    
 
       <div class="login">
         <form [formGroup]="loginForm" (ngSubmit)="login()">

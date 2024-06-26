@@ -25,13 +25,16 @@ export class LoginComponent implements OnInit {
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, this.passwordStrengthValidator()]),
+      confirmPassword: new FormControl('', [Validators.required]),
       cpf: new FormControl('', [Validators.required]),
       phoneNumber: new FormControl('', [Validators.required])
-    });
+    }, { validators: this.passwordMatchValidator });
+
     this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required])
     });
+
     this.forgetPasswordForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email])
     });
@@ -56,10 +59,9 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['/login']);
             }
           });
-          
+
         },
         error: (error) => {
-          console.log(error);
           console.error('Erro ao cadastrar usuário', error);
           this.errorMessage = 'Erro ao cadastrar usuário. Por favor, tente novamente.';
 
@@ -94,7 +96,7 @@ export class LoginComponent implements OnInit {
             this.errorMessage = null;
             localStorage.setItem('userId', response.token);
             localStorage.setItem('token', response.token);
-            
+
             const roles = response.roles;
             if (roles.includes('ROLE_ADMIN')) {
               localStorage.setItem('permission', 'ADMIN');
@@ -122,11 +124,17 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['/login']);
             }
           });
-          
+
         }
       });
     }
   }
+
+  passwordMatchValidator: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
+    const password = group.get('password')?.value;
+    const confirmPassword = group.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { passwordMismatch: true };
+  };
 
   emailDomainValidator(domainName: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -159,6 +167,18 @@ export class LoginComponent implements OnInit {
         passwordStrength: 'Password must be at least 8 characters long, include at least one uppercase letter, one number, and one special character.'
       };
     };
+  }
+
+  showPasswordMismatchError(): boolean {
+    const passwordControl = this.cadastroForm.get('password');
+    const confirmPasswordControl = this.cadastroForm.get('confirmPassword');
+    return this.cadastroForm.errors?.['passwordMismatch'] &&
+      (passwordControl?.touched || confirmPasswordControl?.touched);
+  }
+
+  showPasswordStrengthError(): boolean {
+    const passwordControl = this.cadastroForm.get('password');
+    return passwordControl?.value?.length > 0 && passwordControl?.errors?.['passwordStrength'];
   }
 
   recuperarSenha() {
