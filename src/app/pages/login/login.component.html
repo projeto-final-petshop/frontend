@@ -52,7 +52,7 @@
             <label *ngIf="isForgetPassword" style="padding-top: 40px !important;" for="chk" aria-hidden="true"> <p >Esqueci a senha</p></label>
             <form [formGroup]="forgetPasswordForm" *ngIf="isForgetPassword">
               <p style="padding: 30px;"> Digite seu email e enviaremos um email para que você possa redefinir sua senha </p>
-              <input type="email" formControlName="email" id="email"  appCpfFormat placeholder="email">
+              <input type="email" formControlName="email" id="email"   placeholder="email">
             </form>
             <button (click)="recuperarSenha()">Recuperar senha</button>
             <a    class="esqueciSenha" href="#" (click)="esqueciSenha(false); $event.preventDefault()">Realizar login</a>
