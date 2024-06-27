@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class CadastroPetsService {
 
   private baseUrl = 'http://localhost:8888/api/v1/pets';
-  private registerUrl = `${this.baseUrl}/register`;
+  private registerUrl = `${this.baseUrl}/create`;
 
 
   constructor(private http: HttpClient) { }
