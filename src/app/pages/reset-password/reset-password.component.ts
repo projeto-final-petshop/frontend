@@ -49,7 +49,7 @@ export class ResetPasswordComponent implements OnInit {
         return null;
       }
       return {
-        passwordStrength: 'Password must be at least 8 characters long, include at least one uppercase letter, one number, and one special character.'
+        passwordStrength: '  Para sua segurança, sua senha deve conter letras maiúsculas, minúsculas, números e caracteres especiais.'
       };
     };
   }
