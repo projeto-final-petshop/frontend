@@ -41,6 +41,11 @@
           <label  style="padding-top: 40px !important;" for="chk" aria-hidden="true"> <p >Login</p></label>
           <input type="email" formControlName="email" placeholder="Email" required="true">
           <input type="password" formControlName="password" placeholder="Senha" required="">
+          <div *ngIf="loginForm.get('email')?.touched || loginForm.get('email')?.dirty">
+            <div *ngIf="loginForm.get('email')?.errors?.['email']">
+              <p class="error-message">Por favor, insira um endereço de e-mail válido.</p>
+            </div>
+          </div>
           <div *ngIf="errorMessage">
             <p class="error-message">{{ errorMessage }}</p>
           </div>
