@@ -133,7 +133,15 @@ export class PerfilPetsComponent implements OnInit {
     if (this.petDataForm.valid) {
       this.petService.updatePet(this.pets[this.selectedPetIndex].id, this.petDataForm.getRawValue()).subscribe({
         next: (response: any) => {
-          console.log('Pet atualizado com sucesso', response);
+
+          console.log('Pet atualizado com sucesso!', response);
+          const dialogRef = this.dialog.open(ConfirmDialog, {
+            width: '250px',
+            data: { message: 'Pet atualizado com sucesso!' }
+          });
+          dialogRef.afterClosed().subscribe(() => {
+            console.log('sucess')
+          });
         },
         error: (error: any) => {
           console.error('Erro ao atualizar pet', error);

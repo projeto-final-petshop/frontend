@@ -2,6 +2,10 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/cor
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { PetService } from 'src/app/services/pets.service';
+import { ConfirmDialog } from '../dialog/dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { isHttpFailureResponse } from 'src/app/utils/error.validator';
+import { DialogErrorComponent } from '../dialog-error/dialog-error.component';
 
 @Component({
   selector: 'app-new-appointment',
@@ -18,7 +22,8 @@ export class NewAppointmentComponent implements OnInit, OnChanges {
   constructor(
     private fb: FormBuilder,
     private appointmentService: AppointmentService,
-    private petService: PetService
+    private petService: PetService,
+    private dialog: MatDialog
   ) {
     this.appointmentForm = this.fb.group({
       petId: ['', Validators.required],
@@ -133,10 +138,30 @@ export class NewAppointmentComponent implements OnInit, OnChanges {
       if (this.isEditMode && this.appointmentId) {
         this.appointmentService.updateAppointment(this.appointmentId, newAppointment).subscribe(
           (response: any) => {
-            console.log('Appointment Updated:', response);
+            console.log('Agendamento realizado com sucesso!', response);
+            const dialogRef = this.dialog.open(ConfirmDialog, {
+              width: '250px',
+              data: { message: 'Agendamento realizado com sucesso!' }
+            });
+            dialogRef.afterClosed().subscribe(() => {
+              console.log('sucess')
+            });
           },
           (error: any) => {
             console.error('Error Updating Appointment:', error);
+            let requestErrorMessage = error.message;
+            if (isHttpFailureResponse(error)) {
+              requestErrorMessage = "Serviço fora do ar. Nossa equipe está trabalhando para voltar o quanto antes."
+            }
+            const dialogRef = this.dialog.open(DialogErrorComponent, {
+              width: '250px',
+              data: { message: requestErrorMessage }
+            });
+            dialogRef.afterClosed().subscribe(result => {
+              if (result) {
+                // this.router.navigate(['/login']);
+              }
+            });
           }
         );
       } else {
