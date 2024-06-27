@@ -22,7 +22,7 @@ export class CadastroPetsComponent implements OnInit {
       name: new FormControl(''),
       color: new FormControl('',),
       breed: new FormControl(''),
-      animalType: new FormControl(''),
+      petType: new FormControl(''),
       birthdate: new FormControl(''),
     });
   }
