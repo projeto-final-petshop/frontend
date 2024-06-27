@@ -168,9 +168,31 @@ export class NewAppointmentComponent implements OnInit, OnChanges {
         this.appointmentService.scheduleAppointment(newAppointment).subscribe(
           (response: any) => {
             console.log('New Appointment Created:', response);
+            console.log('Agendamento realizado com sucesso!', response);
+            const dialogRef = this.dialog.open(ConfirmDialog, {
+              width: '250px',
+              data: { message: 'Agendamento realizado com sucesso!' }
+            });
+            dialogRef.afterClosed().subscribe(() => {
+              console.log('sucess')
+            });
           },
           (error: any) => {
             console.error('Error Creating Appointment:', error);
+            console.error('Error Updating Appointment:', error);
+            let requestErrorMessage = error.message;
+            if (isHttpFailureResponse(error)) {
+              requestErrorMessage = "Serviço fora do ar. Nossa equipe está trabalhando para voltar o quanto antes."
+            }
+            const dialogRef = this.dialog.open(DialogErrorComponent, {
+              width: '250px',
+              data: { message: requestErrorMessage }
+            });
+            dialogRef.afterClosed().subscribe(result => {
+              if (result) {
+                // this.router.navigate(['/login']);
+              }
+            });
           }
         );
       }
