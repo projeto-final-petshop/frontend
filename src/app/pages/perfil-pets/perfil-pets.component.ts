@@ -40,7 +40,7 @@ export class PerfilPetsComponent implements OnInit {
       name: ['', Validators.required],
       breed: ['', Validators.required],
       color: ['', Validators.required],
-      animalType: ['', Validators.required],
+      petType: ['', Validators.required],
       birthdate: ['', Validators.required],
       createdAt: [{value: '', disabled: true}],
       updatedAt: [{value: '', disabled: true}]
